@@ -7,7 +7,7 @@ package com.avbravo.jmoordbutils.timepicker;
 
 
 import com.avbravo.jmoordbutils.DateUtil;
-import com.avbravo.jmoordbutils.JsfUtil;
+import com.avbravo.jmoordbutils.MessagesUtil;
 import jakarta.ejb.Stateless;
 
 import java.io.Serializable;
@@ -71,7 +71,7 @@ public class TimePickerServices  {
             String time=DateUtil.converterLocalTimeToStringAMPM(localTime);
           timePicker = convertToTimePicker(time);
         } catch (Exception e) {
-            JsfUtil.errorDialog(JsfUtil.nameOfMethod(), e.getLocalizedMessage().toString());
+            MessagesUtil.errorDialog(MessagesUtil.nameOfMethod(), e.getLocalizedMessage().toString());
                    
         }
         return timePicker;
@@ -97,16 +97,16 @@ public class TimePickerServices  {
         Integer isPM = time.indexOf("PM");
         
         if(idHour == -1){
-            JsfUtil.warningDialog("TimePicker Component","no tiene : de las horas "+time);
+            MessagesUtil.warningDialog("TimePicker Component","no tiene : de las horas "+time);
         }
         if(idMinute ==-1){
-               JsfUtil.warningDialog("TimePicker Component","no tiene : de los minutos "+time);
+               MessagesUtil.warningDialog("TimePicker Component","no tiene : de los minutos "+time);
         }
         if(idAMPM == -1){
-             JsfUtil.warningDialog("TimePicker Component","No tiene un espacio en blanco para separar AM/PM "+time);
+             MessagesUtil.warningDialog("TimePicker Component","No tiene un espacio en blanco para separar AM/PM "+time);
         }
         if(isAM ==-1 && isPM ==-1){
-            JsfUtil.warningDialog("TimePicker Component","No tiene letras AM o PM "+time);
+            MessagesUtil.warningDialog("TimePicker Component","No tiene letras AM o PM "+time);
         }
         
        
@@ -122,7 +122,7 @@ public class TimePickerServices  {
             
            if(idAMPM == -1){
                System.out.println(" La fecha no tiene espacios para AM/PM");
-               JsfUtil.errorDialog("Advertencia", "La fecha no tiene espacios para AM/PM");
+               MessagesUtil.errorDialog("Advertencia", "La fecha no tiene espacios para AM/PM");
            }else{
                ampm = time.substring(idAMPM+1,time.length());
            }
@@ -132,7 +132,7 @@ public class TimePickerServices  {
            timePicker.setMinute(minutes);
            timePicker.setAmpm(ampm.trim());
         } catch (Exception e) {
-JsfUtil.errorDialog(JsfUtil.nameOfMethod(), e.getLocalizedMessage().toString());
+MessagesUtil.errorDialog(MessagesUtil.nameOfMethod(), e.getLocalizedMessage().toString());
         }
         return timePicker;
     }
@@ -149,7 +149,7 @@ JsfUtil.errorDialog(JsfUtil.nameOfMethod(), e.getLocalizedMessage().toString());
 
          return timePicker.getHour()+ ":"+timePicker.getMinute()+ (show?":"+timePicker.getSecond()+" ":" ")+timePicker.getAmpm();
         } catch (Exception e) {
-JsfUtil.errorDialog(JsfUtil.nameOfMethod(), e.getLocalizedMessage().toString());
+MessagesUtil.errorDialog(MessagesUtil.nameOfMethod(), e.getLocalizedMessage().toString());
         }
         return "";
     }
@@ -161,7 +161,7 @@ JsfUtil.errorDialog(JsfUtil.nameOfMethod(), e.getLocalizedMessage().toString());
 
          return timePicker.getHour()+ ":"+timePicker.getMinute()+ " "+timePicker.getAmpm();
         } catch (Exception e) {
-                 JsfUtil.errorDialog(JsfUtil.nameOfMethod(), e.getLocalizedMessage().toString());
+                 MessagesUtil.errorDialog(MessagesUtil.nameOfMethod(), e.getLocalizedMessage().toString());
         }
         return "";
     }
@@ -209,7 +209,7 @@ JsfUtil.errorDialog(JsfUtil.nameOfMethod(), e.getLocalizedMessage().toString());
         localTime =localTime.of(hour, minute,seconds);
             System.out.println("Nuevo timepo "+localTime);
         } catch (Exception e) {
-JsfUtil.errorDialog(JsfUtil.nameOfMethod(), e.getLocalizedMessage().toString());
+MessagesUtil.errorDialog(MessagesUtil.nameOfMethod(), e.getLocalizedMessage().toString());
         }
         return localTime;
     }

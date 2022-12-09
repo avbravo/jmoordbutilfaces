@@ -5,7 +5,7 @@
  */
 package com.avbravo.jmoordbutils;
 
-import static com.avbravo.jmoordbutils.JsfUtil.nameOfMethod;
+import static com.avbravo.jmoordbutils.MessagesUtil.nameOfMethod;
 import static com.diogonunes.jcolor.Ansi.colorize;
 import com.diogonunes.jcolor.AnsiFormat;
 import static com.diogonunes.jcolor.Attribute.BLUE_BACK;
@@ -28,7 +28,7 @@ public class ConsoleUtil {
             AnsiFormat fInfo = new AnsiFormat(CYAN_TEXT());
             System.out.println(fInfo.format(text));
         } catch (Exception e) {
-            JsfUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
+            MessagesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
         }
     }
 // </editor-fold>
@@ -39,7 +39,7 @@ public class ConsoleUtil {
 
             System.out.println(text);
         } catch (Exception e) {
-            JsfUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
+            MessagesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
         }
     }
 // </editor-fold>
@@ -50,7 +50,7 @@ public class ConsoleUtil {
             AnsiFormat fError = new AnsiFormat(YELLOW_TEXT(), RED_BACK());
             System.out.println(fError.format(text));
         } catch (Exception e) {
-            JsfUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
+            MessagesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
         }
     }
 // </editor-fold>
@@ -61,7 +61,7 @@ public class ConsoleUtil {
             AnsiFormat fWarning = new AnsiFormat(GREEN_TEXT(), BLUE_BACK(), BOLD());
             System.out.println(fWarning.format(text));
         } catch (Exception e) {
-            JsfUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
+            MessagesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
         }
     }
 // </editor-fold>
@@ -71,7 +71,7 @@ public class ConsoleUtil {
         try {
            System.out.print(colorize(text, BOLD(), BRIGHT_YELLOW_TEXT(), GREEN_BACK()));
         } catch (Exception e) {
-            JsfUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
+            MessagesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
         }
     }
 // </editor-fold>
@@ -81,7 +81,7 @@ public class ConsoleUtil {
         try {
          System.out.println(colorize(text, BOLD(), BRIGHT_YELLOW_TEXT(), RED_BACK()));
         } catch (Exception e) {
-            JsfUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
+            MessagesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
         }
     }
 // </editor-fold>

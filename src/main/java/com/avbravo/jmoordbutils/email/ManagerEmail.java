@@ -5,7 +5,7 @@
  */
 package com.avbravo.jmoordbutils.email;
 
-import com.avbravo.jmoordbutils.JsfUtil;
+import com.avbravo.jmoordbutils.MessagesUtil;
 import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.Callable;
@@ -71,7 +71,7 @@ public class ManagerEmail {
             System.out.println("Done");
 
         } catch (Exception ex) {
-            JsfUtil.infoDialog("error", ex.getLocalizedMessage());
+            MessagesUtil.infoDialog("error", ex.getLocalizedMessage());
             System.out.println("error " + ex.getLocalizedMessage());
         }
         return null;
@@ -132,7 +132,7 @@ public class ManagerEmail {
             Transport.send(message);
             sending = true;
         } catch (Exception ex) {
-            JsfUtil.errorMessage("send() " + ex.getLocalizedMessage());
+            MessagesUtil.errorMessage("send() " + ex.getLocalizedMessage());
             System.out.println("send() " + ex.getLocalizedMessage());
         }
         return sending;
@@ -224,7 +224,7 @@ public class ManagerEmail {
             Transport.send(message);
             sending = true;
         } catch (Exception ex) {
-            JsfUtil.errorMessage("send() " + ex.getLocalizedMessage());
+            MessagesUtil.errorMessage("send() " + ex.getLocalizedMessage());
             System.out.println("send() " + ex.getLocalizedMessage());
         }
         return sending;
@@ -286,7 +286,7 @@ public class ManagerEmail {
             Transport.send(message);
             sending = true;
         } catch (Exception ex) {
-            JsfUtil.errorMessage("send() " + ex.getLocalizedMessage());
+            MessagesUtil.errorMessage("send() " + ex.getLocalizedMessage());
             System.out.println("send() " + ex.getLocalizedMessage());
         }
         return sending;
@@ -382,7 +382,7 @@ public class ManagerEmail {
             Transport.send(message);
             sending = true;
         } catch (Exception ex) {
-            JsfUtil.errorMessage("send() " + ex.getLocalizedMessage());
+            MessagesUtil.errorMessage("send() " + ex.getLocalizedMessage());
             System.out.println("send() " + ex.getLocalizedMessage());
         }
         return sending;
@@ -438,7 +438,7 @@ public class ManagerEmail {
             Transport.send(message);
             sending = true;
         } catch (Exception ex) {
-            JsfUtil.errorMessage("send() " + ex.getLocalizedMessage());
+            MessagesUtil.errorMessage("send() " + ex.getLocalizedMessage());
             System.out.println("send() " + ex.getLocalizedMessage());
         }
         return sending;
@@ -500,7 +500,7 @@ public class ManagerEmail {
             Transport.send(message);
             sending = true;
         } catch (Exception ex) {
-            JsfUtil.errorMessage("send() " + ex.getLocalizedMessage());
+            MessagesUtil.errorMessage("send() " + ex.getLocalizedMessage());
             System.out.println("send() " + ex.getLocalizedMessage());
         }
         return sending;
@@ -555,7 +555,7 @@ public class ManagerEmail {
             store.close();
             sending = true;
         } catch (Exception ex) {
-            JsfUtil.errorMessage("send() " + ex.getLocalizedMessage());
+            MessagesUtil.errorMessage("send() " + ex.getLocalizedMessage());
             System.out.println("send() " + ex.getLocalizedMessage());
         }
         return sending;

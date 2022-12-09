@@ -6,8 +6,8 @@
 package com.avbravo.jmoordbutils.paginator;
 
 import com.avbravo.jmoordbutils.DateUtil;
-import com.avbravo.jmoordbutils.JsfUtil;
-import static com.avbravo.jmoordbutils.JsfUtil.nameOfMethod;
+import com.avbravo.jmoordbutils.MessagesUtil;
+import static com.avbravo.jmoordbutils.MessagesUtil.nameOfMethod;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,12 +33,11 @@ public interface IPaginator {
         } catch (Exception e) {
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            System.out.println(
-                    "Class:" + JsfUtil.nameOfClass() + " Metodo:" + JsfUtil.nameOfMethod());
+            System.out.println("Class:" + MessagesUtil.nameOfClass() + " Metodo:" + MessagesUtil.nameOfMethod());
             System.out.println("Error " + e.getLocalizedMessage());
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            JsfUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
+            MessagesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return "";
     } // </editor-fold>
@@ -53,12 +52,11 @@ public interface IPaginator {
         } catch (Exception e) {
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            System.out.println(
-                    "Class:" + JsfUtil.nameOfClass() + " Metodo:" + JsfUtil.nameOfMethod());
+            System.out.println("Class:" + MessagesUtil.nameOfClass() + " Metodo:" + MessagesUtil.nameOfMethod());
             System.out.println("Error " + e.getLocalizedMessage());
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            JsfUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
+            MessagesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return "";
     } // </editor-fold>
@@ -75,12 +73,11 @@ public interface IPaginator {
         } catch (Exception e) {
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            System.out.println(
-                    "Class:" + JsfUtil.nameOfClass() + " Metodo:" + JsfUtil.nameOfMethod());
+            System.out.println("Class:" + MessagesUtil.nameOfClass() + " Metodo:" + MessagesUtil.nameOfMethod());
             System.out.println("Error " + e.getLocalizedMessage());
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            JsfUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
+            MessagesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return "";
     } // </editor-fold>
@@ -99,12 +96,11 @@ public interface IPaginator {
         } catch (Exception e) {
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            System.out.println(
-                    "Class:" + JsfUtil.nameOfClass() + " Metodo:" + JsfUtil.nameOfMethod());
+            System.out.println("Class:" + MessagesUtil.nameOfClass() + " Metodo:" + MessagesUtil.nameOfMethod());
             System.out.println("Error " + e.getLocalizedMessage());
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            JsfUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
+            MessagesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return "";
     } // </editor-fold>
@@ -127,12 +123,11 @@ public interface IPaginator {
         } catch (Exception e) {
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            System.out.println(
-                    "Class:" + JsfUtil.nameOfClass() + " Metodo:" + JsfUtil.nameOfMethod());
+            System.out.println("Class:" + MessagesUtil.nameOfClass() + " Metodo:" + MessagesUtil.nameOfMethod());
             System.out.println("Error " + e.getLocalizedMessage());
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            JsfUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
+            MessagesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return "";
     }
@@ -157,12 +152,11 @@ public interface IPaginator {
         } catch (Exception e) {
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            System.out.println(
-                    "Class:" + JsfUtil.nameOfClass() + " Metodo:" + JsfUtil.nameOfMethod());
+            System.out.println("Class:" + MessagesUtil.nameOfClass() + " Metodo:" + MessagesUtil.nameOfMethod());
             System.out.println("Error " + e.getLocalizedMessage());
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            JsfUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
+            MessagesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return numberOfPage;
     }
@@ -189,12 +183,11 @@ public interface IPaginator {
         } catch (Exception e) {
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            System.out.println(
-                    "Class:" + JsfUtil.nameOfClass() + " Metodo:" + JsfUtil.nameOfMethod());
+            System.out.println("Class:" + MessagesUtil.nameOfClass() + " Metodo:" + MessagesUtil.nameOfMethod());
             System.out.println("Error " + e.getLocalizedMessage());
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            JsfUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
+            MessagesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return pages;
     }
@@ -244,7 +237,7 @@ public interface IPaginator {
     }
 
     // </editor-fold>
-// <editor-fold defaultstate="collapsed" desc="move(Paginator paginator)">
+// <editor-fold defaultstate="collapsed" desc="move(Paginator paginator, Object s)">
     public default void move(Paginator paginator, Object s) {
 
     }

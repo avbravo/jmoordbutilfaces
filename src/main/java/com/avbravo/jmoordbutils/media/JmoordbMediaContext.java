@@ -5,7 +5,7 @@
  */
 package com.avbravo.jmoordbutils.media;
 
-import static com.avbravo.jmoordbutils.JsfUtil.errorMessage;
+import static com.avbravo.jmoordbutils.MessagesUtil.errorMessage;
 import jakarta.faces.context.FacesContext;
 
 /**

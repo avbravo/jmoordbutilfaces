@@ -5,7 +5,7 @@
  */
 package com.avbravo.jmoordbutils.fileencripter;
 
-import com.avbravo.jmoordbutils.JsfUtil;
+import com.avbravo.jmoordbutils.MessagesUtil;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.security.AlgorithmParameters;
@@ -120,10 +120,10 @@ public class FileEncryption {
      */
     public static Boolean cifrar(String filenamepath, String targetDirectory, String password) {
         try {
-            String name = JsfUtil.nameOfFileInPath(filenamepath);
-            String extension = JsfUtil.extensionOfFileInPath(filenamepath);
-            if(!JsfUtil.existDirectory(targetDirectory)){
-                if(JsfUtil.mkdir(targetDirectory)){
+            String name = MessagesUtil.nameOfFileInPath(filenamepath);
+            String extension = MessagesUtil.extensionOfFileInPath(filenamepath);
+            if(!MessagesUtil.existDirectory(targetDirectory)){
+                if(MessagesUtil.mkdir(targetDirectory)){
                     
                 }else{
                     

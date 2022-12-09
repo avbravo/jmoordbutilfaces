@@ -5,7 +5,7 @@
  */
 package com.avbravo.jmoordbutils.jaxrs;
 
-import com.avbravo.jmoordbutils.JsfUtil;
+import com.avbravo.jmoordbutils.MessagesUtil;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
@@ -40,7 +40,7 @@ public class Microservices {
 
         } catch (Exception e) {
 
-            JsfUtil.errorDialog("sendFileToMicroservices()", e.getLocalizedMessage());
+            MessagesUtil.errorDialog("sendFileToMicroservices()", e.getLocalizedMessage());
         }
         return response;
 
@@ -66,7 +66,7 @@ public class Microservices {
 
         } catch (Exception e) {
 
-            JsfUtil.errorDialog("sendFileToMicroservices()", e.getLocalizedMessage());
+            MessagesUtil.errorDialog("sendFileToMicroservices()", e.getLocalizedMessage());
         }
         return response;
 
@@ -96,7 +96,7 @@ public class Microservices {
 
         } catch (Exception e) {
 
-            JsfUtil.errorDialog("sendFileWithJaxRsHeaders)", e.getLocalizedMessage());
+            MessagesUtil.errorDialog("sendFileWithJaxRsHeaders)", e.getLocalizedMessage());
         }
         return response;
 
@@ -124,7 +124,7 @@ public class Microservices {
 
         } catch (Exception e) {
 
-            JsfUtil.errorDialog("sendFileWithJaxRsHeaders)", e.getLocalizedMessage());
+            MessagesUtil.errorDialog("sendFileWithJaxRsHeaders)", e.getLocalizedMessage());
         }
         return response;
 

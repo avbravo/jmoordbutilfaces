@@ -82,9 +82,9 @@ import org.apache.commons.io.FilenameUtils;
  *
  * @authoravbravo
  */
-public class JsfUtil implements Serializable {
+public class MessagesUtil implements Serializable {
 
-    private static final Logger LOG = Logger.getLogger(JsfUtil.class.getName());
+    private static final Logger LOG = Logger.getLogger(MessagesUtil.class.getName());
     private static final String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
 
     // static Pattern object, since pattern is fixed
@@ -197,7 +197,7 @@ public class JsfUtil implements Serializable {
     // <editor-fold defaultstate="collapsed" desc="getObjectFromRequestParameter"> 
     public static Object getObjectFromRequestParameter(String requestParameterName,
      Converter converter, UIComponent component) {
-        String theId = JsfUtil.getRequestParameter(requestParameterName);
+        String theId = MessagesUtil.getRequestParameter(requestParameterName);
         return converter.getAsObject(FacesContext.getCurrentInstance(), component, theId);
     }
     // </editor-fold>
@@ -500,7 +500,7 @@ public class JsfUtil implements Serializable {
         try {
             return texto.substring(texto.indexOf("."), texto.length());
         } catch (Exception e) {
-            JsfUtil.errorMessage("getExtension() " + e.getLocalizedMessage());
+            MessagesUtil.errorMessage("getExtension() " + e.getLocalizedMessage());
         }
         return "";
     }
@@ -533,7 +533,7 @@ public class JsfUtil implements Serializable {
 
             return true;
         } catch (IOException e) {
-            JsfUtil.errorMessage("copyFile() " + e.getLocalizedMessage());
+            MessagesUtil.errorMessage("copyFile() " + e.getLocalizedMessage());
         }
         return false;
     }
@@ -1319,7 +1319,7 @@ public class JsfUtil implements Serializable {
             }
 
         } catch (Exception e) {
-            JsfUtil.errorMessage("primerCaracter() " + e.getLocalizedMessage());
+            MessagesUtil.errorMessage("primerCaracter() " + e.getLocalizedMessage());
         }
         return texto;
     }
@@ -1585,7 +1585,7 @@ public class JsfUtil implements Serializable {
             }
 
         } catch (Exception e) {
-            JsfUtil.warningMessage("conversor() " + e.getLocalizedMessage().toString());
+            MessagesUtil.warningMessage("conversor() " + e.getLocalizedMessage().toString());
 
         }
         return d;
@@ -3015,7 +3015,7 @@ public class JsfUtil implements Serializable {
             }
             return imagenOriginal;
         } catch (IOException ex) {
-        JsfUtil.errorDialog("reducirImagen() ", ex.getLocalizedMessage());
+        MessagesUtil.errorDialog("reducirImagen() ", ex.getLocalizedMessage());
 
             return null;
         }
@@ -3033,7 +3033,7 @@ public class JsfUtil implements Serializable {
         } catch (IOException ex) {
            
 
- JsfUtil.errorDialog(nameOfMethod(), ex.getLocalizedMessage());
+ MessagesUtil.errorDialog(nameOfMethod(), ex.getLocalizedMessage());
             return false;
         }
     }// </editor-fold>
@@ -3057,7 +3057,7 @@ public class JsfUtil implements Serializable {
                         return true;
                     }
         } catch (Exception e) {
-             JsfUtil.errorDialog(nameOfMethod(), e.getLocalizedMessage());
+             MessagesUtil.errorDialog(nameOfMethod(), e.getLocalizedMessage());
         }
         return false;
     }
@@ -3082,17 +3082,17 @@ public class JsfUtil implements Serializable {
             if (Objects.isNull(fieldValue)
                     || fieldValue.isBlank()
                     || fieldValue.equals("")) {
-                nombre = JsfUtil.generateName();
+                nombre = MessagesUtil.generateName();
 
             } else {
                 nombre = FilenameUtils.getBaseName(fieldValue);
             }
-            archivo = new File(directoryImagenes + nombre + JsfUtil.getFileExt(localFile));
-            ImageIO.write(imagenReduced, JsfUtil.getFileExt(localFile).substring(1), archivo);
-            imageFilePath = directoryImagenes + nombre + JsfUtil.getFileExt(localFile);
+            archivo = new File(directoryImagenes + nombre + MessagesUtil.getFileExt(localFile));
+            ImageIO.write(imagenReduced, MessagesUtil.getFileExt(localFile).substring(1), archivo);
+            imageFilePath = directoryImagenes + nombre + MessagesUtil.getFileExt(localFile);
 
         } catch (IOException e) {
-            JsfUtil.errorDialog(nameOfMethod(), e.getLocalizedMessage());
+            MessagesUtil.errorDialog(nameOfMethod(), e.getLocalizedMessage());
 
         }
         return imageFilePath;
@@ -3139,7 +3139,7 @@ public class JsfUtil implements Serializable {
     public static void propertiesBigIntegerToContext(Properties properties, String key){
         try {
              if (properties.getProperty(key) == null) {
-                    JsfUtil.warningMessage("no existe la propiedad" +key);
+                    MessagesUtil.warningMessage("no existe la propiedad" +key);
 //                    JmoordbContext.put(key, 0);
                 } else {
                     Integer value = Integer.parseInt(properties.getProperty(key));

@@ -5,7 +5,7 @@
  */
 package com.avbravo.jmoordbutils.logger;
 
-import static com.avbravo.jmoordbutils.JsfUtil.errorDialog;
+import static com.avbravo.jmoordbutils.MessagesUtil.errorDialog;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
