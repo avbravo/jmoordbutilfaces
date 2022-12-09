@@ -6,7 +6,7 @@
 package com.avbravo.jmoordbutils;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.faces.bean.SessionScoped;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import java.io.Serializable;

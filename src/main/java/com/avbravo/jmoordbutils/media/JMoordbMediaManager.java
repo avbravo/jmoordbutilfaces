@@ -11,7 +11,7 @@ package com.avbravo.jmoordbutils.media;
 import com.avbravo.jmoordbutils.JsfUtil;
 import static com.avbravo.jmoordbutils.JsfUtil.errorDialog;
 import jakarta.annotation.PostConstruct;
-import jakarta.faces.bean.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 import java.io.File;
 import java.io.FileInputStream;

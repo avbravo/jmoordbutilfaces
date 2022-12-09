@@ -8,7 +8,7 @@ package com.avbravo.jmoordbutils.logger;
 
 
 import static com.avbravo.jmoordbutils.JsfUtil.errorDialog;
-import jakarta.faces.bean.SessionScoped;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 import java.io.InputStream;
 import java.io.Serializable;
