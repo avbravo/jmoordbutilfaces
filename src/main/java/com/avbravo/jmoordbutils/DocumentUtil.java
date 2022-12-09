@@ -71,7 +71,7 @@ public class DocumentUtil {
 
             }
         } catch (Exception e) {
-            MessagesUtil.errorMessage(MessagesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
         }
         return sort;
     }
@@ -99,7 +99,7 @@ public class DocumentUtil {
                     ordernumber = 1;
             }
         } catch (Exception e) {
-            MessagesUtil.errorMessage(MessagesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
         }
         return ordernumber;
     }
@@ -143,7 +143,7 @@ public class DocumentUtil {
             }
 
         } catch (Exception e) {
-            MessagesUtil.errorMessage(MessagesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
         }
         return null;
 
@@ -170,7 +170,7 @@ public class DocumentUtil {
             filter = Filters.and(Filters.gte(fieldnamestart, dateStart), Filters.lte(fieldlimitname, dateEnd));
             return filter;
         } catch (Exception e) {
-            MessagesUtil.errorMessage(MessagesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
         }
 
         return filter;
@@ -202,7 +202,7 @@ public class DocumentUtil {
             filter = Filters.and(Filters.gte(fieldnamestart, dateStart), Filters.lte(fieldlimitname, dateEnd));
             return filter;
         } catch (Exception e) {
-            MessagesUtil.errorMessage(MessagesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
         }
 
         return filter;
@@ -230,7 +230,7 @@ public class DocumentUtil {
 
 return filter;
         } catch (Exception e) {
-          MessagesUtil.errorMessage(MessagesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
+          FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
         }
 
         return filter;

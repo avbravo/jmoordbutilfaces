@@ -6,8 +6,8 @@
 package com.avbravo.jmoordbutils.paginator;
 
 import com.avbravo.jmoordbutils.DateUtil;
-import com.avbravo.jmoordbutils.MessagesUtil;
-import static com.avbravo.jmoordbutils.MessagesUtil.nameOfMethod;
+import com.avbravo.jmoordbutils.FacesUtil;
+import static com.avbravo.jmoordbutils.FacesUtil.nameOfMethod;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,11 +33,11 @@ public interface IPaginator {
         } catch (Exception e) {
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            System.out.println("Class:" + MessagesUtil.nameOfClass() + " Metodo:" + MessagesUtil.nameOfMethod());
+            System.out.println("Class:" + FacesUtil.nameOfClass() + " Metodo:" + FacesUtil.nameOfMethod());
             System.out.println("Error " + e.getLocalizedMessage());
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            MessagesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return "";
     } // </editor-fold>
@@ -52,11 +52,11 @@ public interface IPaginator {
         } catch (Exception e) {
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            System.out.println("Class:" + MessagesUtil.nameOfClass() + " Metodo:" + MessagesUtil.nameOfMethod());
+            System.out.println("Class:" + FacesUtil.nameOfClass() + " Metodo:" + FacesUtil.nameOfMethod());
             System.out.println("Error " + e.getLocalizedMessage());
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            MessagesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return "";
     } // </editor-fold>
@@ -73,11 +73,11 @@ public interface IPaginator {
         } catch (Exception e) {
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            System.out.println("Class:" + MessagesUtil.nameOfClass() + " Metodo:" + MessagesUtil.nameOfMethod());
+            System.out.println("Class:" + FacesUtil.nameOfClass() + " Metodo:" + FacesUtil.nameOfMethod());
             System.out.println("Error " + e.getLocalizedMessage());
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            MessagesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return "";
     } // </editor-fold>
@@ -96,11 +96,11 @@ public interface IPaginator {
         } catch (Exception e) {
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            System.out.println("Class:" + MessagesUtil.nameOfClass() + " Metodo:" + MessagesUtil.nameOfMethod());
+            System.out.println("Class:" + FacesUtil.nameOfClass() + " Metodo:" + FacesUtil.nameOfMethod());
             System.out.println("Error " + e.getLocalizedMessage());
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            MessagesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return "";
     } // </editor-fold>
@@ -123,11 +123,11 @@ public interface IPaginator {
         } catch (Exception e) {
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            System.out.println("Class:" + MessagesUtil.nameOfClass() + " Metodo:" + MessagesUtil.nameOfMethod());
+            System.out.println("Class:" + FacesUtil.nameOfClass() + " Metodo:" + FacesUtil.nameOfMethod());
             System.out.println("Error " + e.getLocalizedMessage());
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            MessagesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return "";
     }
@@ -152,11 +152,11 @@ public interface IPaginator {
         } catch (Exception e) {
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            System.out.println("Class:" + MessagesUtil.nameOfClass() + " Metodo:" + MessagesUtil.nameOfMethod());
+            System.out.println("Class:" + FacesUtil.nameOfClass() + " Metodo:" + FacesUtil.nameOfMethod());
             System.out.println("Error " + e.getLocalizedMessage());
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            MessagesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return numberOfPage;
     }
@@ -183,11 +183,11 @@ public interface IPaginator {
         } catch (Exception e) {
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            System.out.println("Class:" + MessagesUtil.nameOfClass() + " Metodo:" + MessagesUtil.nameOfMethod());
+            System.out.println("Class:" + FacesUtil.nameOfClass() + " Metodo:" + FacesUtil.nameOfMethod());
             System.out.println("Error " + e.getLocalizedMessage());
             System.out.println(
                     "------------------------------------------------------------------------------------------------");
-            MessagesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return pages;
     }

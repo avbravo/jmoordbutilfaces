@@ -6,7 +6,7 @@
 package com.avbravo.jmoordbutils;
 // <editor-fold defaultstate="collapsed" desc="import">  
 
-import static com.avbravo.jmoordbutils.MessagesUtil.errorMessage;
+import static com.avbravo.jmoordbutils.FacesUtil.errorMessage;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -282,7 +282,7 @@ public class JmoordbCoreDateUtil implements Serializable {
 
             h = dateFormatToString(fecha, f);
         } catch (Exception e) {
-            MessagesUtil.errorMessage("hourFromDateToString() " + e.getLocalizedMessage());
+            FacesUtil.errorMessage("hourFromDateToString() " + e.getLocalizedMessage());
         }
         return h;
 
@@ -548,7 +548,7 @@ public class JmoordbCoreDateUtil implements Serializable {
             int dia = calendar.get(Calendar.DAY_OF_MONTH);
             return mes;
         } catch (Exception e) {
-            MessagesUtil.errorMessage(MessagesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
         }
         return 0;
 
@@ -567,7 +567,7 @@ public class JmoordbCoreDateUtil implements Serializable {
             int dia = calendar.get(Calendar.DAY_OF_MONTH);
             return mes;
         } catch (Exception e) {
-            MessagesUtil.errorMessage(MessagesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
         }
         return 0;
 
@@ -846,7 +846,7 @@ public class JmoordbCoreDateUtil implements Serializable {
 
             }
         } catch (Exception e) {
-            MessagesUtil.errorMessage(MessagesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
         }
         return fechaDiaUtilsList;
     }
@@ -1067,7 +1067,7 @@ public class JmoordbCoreDateUtil implements Serializable {
             tiempo.setMinutos(minutos);
 
         } catch (Exception e) {
-            MessagesUtil.errorMessage(MessagesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
         }
 
         return tiempo;
@@ -1081,7 +1081,7 @@ public class JmoordbCoreDateUtil implements Serializable {
                 esmenor = true;
             }
         } catch (Exception e) {
-            MessagesUtil.errorMessage(MessagesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
         }
         return esmenor;
     }
@@ -1095,7 +1095,7 @@ public class JmoordbCoreDateUtil implements Serializable {
                 esmenor = true;
             }
         } catch (Exception e) {
-            MessagesUtil.errorMessage(MessagesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
         }
         return esmenor;
     }
@@ -1109,7 +1109,7 @@ public class JmoordbCoreDateUtil implements Serializable {
                 esmenor = true;
             }
         } catch (Exception e) {
-            MessagesUtil.errorMessage(MessagesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
         }
         return esmenor;
     }
@@ -1151,7 +1151,7 @@ public class JmoordbCoreDateUtil implements Serializable {
             dateresult = java.sql.Date.valueOf(localDate);
 
         } catch (Exception e) {
-            MessagesUtil.errorMessage(MessagesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
         }
         return dateresult;
     }// </editor-fold>
@@ -1175,7 +1175,7 @@ public class JmoordbCoreDateUtil implements Serializable {
             dateresult = java.sql.Date.valueOf(localDate);
 
         } catch (Exception e) {
-            MessagesUtil.errorMessage(MessagesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
         }
         return dateresult;
     }// </editor-fold>
@@ -1199,7 +1199,7 @@ public class JmoordbCoreDateUtil implements Serializable {
             dateresult = java.sql.Date.valueOf(localDate);
 
         } catch (Exception e) {
-            MessagesUtil.errorMessage(MessagesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
         }
         return dateresult;
     }// </editor-fold>
@@ -1484,21 +1484,21 @@ public class JmoordbCoreDateUtil implements Serializable {
         try {
 
             if (anioselected <= 0) {
-                MessagesUtil.warningMessage(rs.getString("warning.anionegativo"));
+                FacesUtil.warningMessage(rs.getString("warning.anionegativo"));
                 return false;
             }
             if (anioselected > getAnioActual()) {
-                MessagesUtil.warningMessage(rs.getString("warning.anomayorqueactual"));
+                FacesUtil.warningMessage(rs.getString("warning.anomayorqueactual"));
                 return false;
             }
 
             Integer anio = getAnioActual() - anioselected;
             if (anio.intValue() > 1) {
-                MessagesUtil.warningMessage(rs.getString("warning.aniomuyantiguo"));
+                FacesUtil.warningMessage(rs.getString("warning.aniomuyantiguo"));
                 return false;
             }
             if (anio.intValue() == 1 && !messelected.toLowerCase().equals("diciembre")) {
-                MessagesUtil.warningMessage(rs.getString("warning.debecerrardiciembredelañoanterior"));
+                FacesUtil.warningMessage(rs.getString("warning.debecerrardiciembredelañoanterior"));
                 return false;
             }
             Integer diaactual = diaActual();
@@ -1507,16 +1507,16 @@ public class JmoordbCoreDateUtil implements Serializable {
             Integer numeromesseleccionado = numeroMes(messelected);
 
             if (numeromesseleccionado > mesactual) {
-                MessagesUtil.warningMessage(rs.getString("warning.mesacerrarmayoractual"));
+                FacesUtil.warningMessage(rs.getString("warning.mesacerrarmayoractual"));
                 return false;
             }
             if (numeromesseleccionado.equals(mesactual) && diaactual < diaminimo) {
-                MessagesUtil.warningMessage(rs.getString("warning.estacerrandoelmesmuypronto"));
+                FacesUtil.warningMessage(rs.getString("warning.estacerrandoelmesmuypronto"));
                 return false;
             }
             return true;
         } catch (Exception e) {
-            MessagesUtil.warningMessage("isValidCierreMensual" + e.getLocalizedMessage());
+            FacesUtil.warningMessage("isValidCierreMensual" + e.getLocalizedMessage());
         }
         return false;
     }
@@ -1562,7 +1562,7 @@ public class JmoordbCoreDateUtil implements Serializable {
             }
             return "";
         } catch (Exception e) {
-            MessagesUtil.warningMessage("isValidCierreMensual" + e.getLocalizedMessage());
+            FacesUtil.warningMessage("isValidCierreMensual" + e.getLocalizedMessage());
         }
         return "";
     }
@@ -1707,7 +1707,7 @@ public class JmoordbCoreDateUtil implements Serializable {
 
             }
         } catch (Exception e) {
-            MessagesUtil.errorMessage(MessagesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
         }
         return meses;
     }
@@ -1752,7 +1752,7 @@ public class JmoordbCoreDateUtil implements Serializable {
         try {
             h = dateFormatToString(date, "dd/MM/yyyy");
         } catch (Exception e) {
-            MessagesUtil.errorMessage("showDate() " + e.getLocalizedMessage());
+            FacesUtil.errorMessage("showDate() " + e.getLocalizedMessage());
         }
         return h;
     }// </editor-fold>
@@ -1763,7 +1763,7 @@ public class JmoordbCoreDateUtil implements Serializable {
         try {
             h = hourFromDateToString(date);
         } catch (Exception e) {
-            MessagesUtil.errorMessage("showHour() " + e.getLocalizedMessage());
+            FacesUtil.errorMessage("showHour() " + e.getLocalizedMessage());
         }
         return h;
     }// </editor-fold>

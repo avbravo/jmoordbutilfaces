@@ -122,9 +122,9 @@ public static Exception exception= new Exception();
             
             if (decodedText == null) {
                 if (dialog) {
-                    MessagesUtil.warningDialog("Advertencia", "No hay codigo QR en la imagen");
+                    FacesUtil.warningDialog("Advertencia", "No hay codigo QR en la imagen");
                 } else {
-                    MessagesUtil.warningMessage("No hay codigo QR en la imagen");
+                    FacesUtil.warningMessage("No hay codigo QR en la imagen");
                 }
 
     
@@ -134,9 +134,9 @@ public static Exception exception= new Exception();
             }
         } catch (IOException e) {
             if(dialog){
-                MessagesUtil.errorDialog("Error", "No puede decodficar la imagen: " + e.getMessage());
+                FacesUtil.errorDialog("Error", "No puede decodficar la imagen: " + e.getMessage());
             }else{
-                MessagesUtil.errorMessage("No puede decodficar la imagen: " + e.getMessage());
+                FacesUtil.errorMessage("No puede decodficar la imagen: " + e.getMessage());
             }
             
 //            System.out.println("Could not decode QR Code, IOException :: " + e.getMessage());

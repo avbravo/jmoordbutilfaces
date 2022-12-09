@@ -6,8 +6,8 @@
 package com.avbravo.jmoordbutils;
 // <editor-fold defaultstate="collapsed" desc="import">  
 
-import static com.avbravo.jmoordbutils.MessagesUtil.errorDialog;
-import static com.avbravo.jmoordbutils.MessagesUtil.errorMessage;
+import static com.avbravo.jmoordbutils.FacesUtil.errorDialog;
+import static com.avbravo.jmoordbutils.FacesUtil.errorMessage;
 import com.avbravo.jmoordbutils.dates.DecomposedDate;
 
 import com.avbravo.jmoordbutils.dates.FechaDiaUtils;
@@ -287,7 +287,7 @@ public class DateUtil implements Serializable {
 
             h = dateFormatToString(fecha, f);
         } catch (Exception e) {
-            MessagesUtil.errorMessage("hourFromDateToString() " + e.getLocalizedMessage());
+            FacesUtil.errorMessage("hourFromDateToString() " + e.getLocalizedMessage());
         }
         return h;
 
@@ -1528,21 +1528,21 @@ public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConve
         try {
 
             if (anioselected <= 0) {
-                MessagesUtil.warningMessage(rs.getString("warning.anionegativo"));
+                FacesUtil.warningMessage(rs.getString("warning.anionegativo"));
                 return false;
             }
             if (anioselected >  getAnioActual()) {
-                MessagesUtil.warningMessage(rs.getString("warning.anomayorqueactual"));
+                FacesUtil.warningMessage(rs.getString("warning.anomayorqueactual"));
                 return false;
             }
 
             Integer anio =  getAnioActual() - anioselected;
             if (anio.intValue() > 1) {
-                MessagesUtil.warningMessage(rs.getString("warning.aniomuyantiguo"));
+                FacesUtil.warningMessage(rs.getString("warning.aniomuyantiguo"));
                 return false;
             }
             if (anio.intValue() == 1 && !messelected.toLowerCase().equals("diciembre")) {
-                MessagesUtil.warningMessage(rs.getString("warning.debecerrardiciembredelañoanterior"));
+                FacesUtil.warningMessage(rs.getString("warning.debecerrardiciembredelañoanterior"));
                 return false;
             }
             Integer diaactual =  diaActual();
@@ -1551,16 +1551,16 @@ public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConve
             Integer numeromesseleccionado =  numeroMes(messelected);
 
             if (numeromesseleccionado > mesactual) {
-                MessagesUtil.warningMessage(rs.getString("warning.mesacerrarmayoractual"));
+                FacesUtil.warningMessage(rs.getString("warning.mesacerrarmayoractual"));
                 return false;
             }
             if (numeromesseleccionado.equals(mesactual) && diaactual < diaminimo) {
-                MessagesUtil.warningMessage(rs.getString("warning.estacerrandoelmesmuypronto"));
+                FacesUtil.warningMessage(rs.getString("warning.estacerrandoelmesmuypronto"));
                 return false;
             }
             return true;
         } catch (Exception e) {
-            MessagesUtil.warningMessage("isValidCierreMensual" + e.getLocalizedMessage());
+            FacesUtil.warningMessage("isValidCierreMensual" + e.getLocalizedMessage());
         }
         return false;
     }
@@ -1606,7 +1606,7 @@ public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConve
             }
             return "";
         } catch (Exception e) {
-            MessagesUtil.warningMessage("isValidCierreMensual" + e.getLocalizedMessage());
+            FacesUtil.warningMessage("isValidCierreMensual" + e.getLocalizedMessage());
         }
         return "";
     }
@@ -1776,7 +1776,7 @@ public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConve
         try {
             h =  dateFormatToString(date, "dd/MM/yyyy");
         } catch (Exception e) {
-            MessagesUtil.errorMessage("showDate() " + e.getLocalizedMessage());
+            FacesUtil.errorMessage("showDate() " + e.getLocalizedMessage());
         }
         return h;
     }// </editor-fold>
@@ -1803,7 +1803,7 @@ public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConve
 
             h = dateFormatLocalDateTimeToString(fecha, f);
         } catch (Exception e) {
-            MessagesUtil.errorMessage("hourFromDateToString() " + e.getLocalizedMessage());
+            FacesUtil.errorMessage("hourFromDateToString() " + e.getLocalizedMessage());
         }
         return h;
 
@@ -1823,7 +1823,7 @@ public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConve
 h = date.format(formatters);
             
         } catch (Exception e) {
-            MessagesUtil.errorMessage("showDateLocalDate()" + e.getLocalizedMessage());
+            FacesUtil.errorMessage("showDateLocalDate()" + e.getLocalizedMessage());
         }
 
         return h;
@@ -1836,7 +1836,7 @@ h = date.format(formatters);
         try {
             h =  hourFromDateToString(date);
         } catch (Exception e) {
-            MessagesUtil.errorMessage("showHour() " + e.getLocalizedMessage());
+            FacesUtil.errorMessage("showHour() " + e.getLocalizedMessage());
         }
         return h;
     }// </editor-fold>
@@ -2273,7 +2273,7 @@ h = date.format(formatters);
         try {
             h =  dateFormatLocalDateTimeToString(date, "dd/MM/yyyy");
         } catch (Exception e) {
-            MessagesUtil.errorMessage("showDate() " + e.getLocalizedMessage());
+            FacesUtil.errorMessage("showDate() " + e.getLocalizedMessage());
         }
         return h;
     }// </editor-fold>
@@ -2311,7 +2311,7 @@ h = date.format(formatters);
         try {
             h =  hourFromDateLocalDateTimeToString(date);
         } catch (Exception e) {
-            MessagesUtil.errorMessage("showHour() " + e.getLocalizedMessage());
+            FacesUtil.errorMessage("showHour() " + e.getLocalizedMessage());
         }
         return h;
     }// </editor-fold>

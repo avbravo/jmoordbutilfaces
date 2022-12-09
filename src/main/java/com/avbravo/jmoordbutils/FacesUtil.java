@@ -82,9 +82,9 @@ import org.apache.commons.io.FilenameUtils;
  *
  * @authoravbravo
  */
-public class MessagesUtil implements Serializable {
+public class FacesUtil implements Serializable {
 
-    private static final Logger LOG = Logger.getLogger(MessagesUtil.class.getName());
+    private static final Logger LOG = Logger.getLogger(FacesUtil.class.getName());
     private static final String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
 
     // static Pattern object, since pattern is fixed
@@ -197,7 +197,7 @@ public class MessagesUtil implements Serializable {
     // <editor-fold defaultstate="collapsed" desc="getObjectFromRequestParameter"> 
     public static Object getObjectFromRequestParameter(String requestParameterName,
      Converter converter, UIComponent component) {
-        String theId = MessagesUtil.getRequestParameter(requestParameterName);
+        String theId = FacesUtil.getRequestParameter(requestParameterName);
         return converter.getAsObject(FacesContext.getCurrentInstance(), component, theId);
     }
     // </editor-fold>
@@ -500,7 +500,7 @@ public class MessagesUtil implements Serializable {
         try {
             return texto.substring(texto.indexOf("."), texto.length());
         } catch (Exception e) {
-            MessagesUtil.errorMessage("getExtension() " + e.getLocalizedMessage());
+            FacesUtil.errorMessage("getExtension() " + e.getLocalizedMessage());
         }
         return "";
     }
@@ -533,7 +533,7 @@ public class MessagesUtil implements Serializable {
 
             return true;
         } catch (IOException e) {
-            MessagesUtil.errorMessage("copyFile() " + e.getLocalizedMessage());
+            FacesUtil.errorMessage("copyFile() " + e.getLocalizedMessage());
         }
         return false;
     }
@@ -1319,7 +1319,7 @@ public class MessagesUtil implements Serializable {
             }
 
         } catch (Exception e) {
-            MessagesUtil.errorMessage("primerCaracter() " + e.getLocalizedMessage());
+            FacesUtil.errorMessage("primerCaracter() " + e.getLocalizedMessage());
         }
         return texto;
     }
@@ -1585,7 +1585,7 @@ public class MessagesUtil implements Serializable {
             }
 
         } catch (Exception e) {
-            MessagesUtil.warningMessage("conversor() " + e.getLocalizedMessage().toString());
+            FacesUtil.warningMessage("conversor() " + e.getLocalizedMessage().toString());
 
         }
         return d;
@@ -3015,7 +3015,7 @@ public class MessagesUtil implements Serializable {
             }
             return imagenOriginal;
         } catch (IOException ex) {
-        MessagesUtil.errorDialog("reducirImagen() ", ex.getLocalizedMessage());
+        FacesUtil.errorDialog("reducirImagen() ", ex.getLocalizedMessage());
 
             return null;
         }
@@ -3033,7 +3033,7 @@ public class MessagesUtil implements Serializable {
         } catch (IOException ex) {
            
 
- MessagesUtil.errorDialog(nameOfMethod(), ex.getLocalizedMessage());
+ FacesUtil.errorDialog(nameOfMethod(), ex.getLocalizedMessage());
             return false;
         }
     }// </editor-fold>
@@ -3057,7 +3057,7 @@ public class MessagesUtil implements Serializable {
                         return true;
                     }
         } catch (Exception e) {
-             MessagesUtil.errorDialog(nameOfMethod(), e.getLocalizedMessage());
+             FacesUtil.errorDialog(nameOfMethod(), e.getLocalizedMessage());
         }
         return false;
     }
@@ -3082,17 +3082,17 @@ public class MessagesUtil implements Serializable {
             if (Objects.isNull(fieldValue)
                     || fieldValue.isBlank()
                     || fieldValue.equals("")) {
-                nombre = MessagesUtil.generateName();
+                nombre = FacesUtil.generateName();
 
             } else {
                 nombre = FilenameUtils.getBaseName(fieldValue);
             }
-            archivo = new File(directoryImagenes + nombre + MessagesUtil.getFileExt(localFile));
-            ImageIO.write(imagenReduced, MessagesUtil.getFileExt(localFile).substring(1), archivo);
-            imageFilePath = directoryImagenes + nombre + MessagesUtil.getFileExt(localFile);
+            archivo = new File(directoryImagenes + nombre + FacesUtil.getFileExt(localFile));
+            ImageIO.write(imagenReduced, FacesUtil.getFileExt(localFile).substring(1), archivo);
+            imageFilePath = directoryImagenes + nombre + FacesUtil.getFileExt(localFile);
 
         } catch (IOException e) {
-            MessagesUtil.errorDialog(nameOfMethod(), e.getLocalizedMessage());
+            FacesUtil.errorDialog(nameOfMethod(), e.getLocalizedMessage());
 
         }
         return imageFilePath;
@@ -3139,7 +3139,7 @@ public class MessagesUtil implements Serializable {
     public static void propertiesBigIntegerToContext(Properties properties, String key){
         try {
              if (properties.getProperty(key) == null) {
-                    MessagesUtil.warningMessage("no existe la propiedad" +key);
+                    FacesUtil.warningMessage("no existe la propiedad" +key);
 //                    JmoordbContext.put(key, 0);
                 } else {
                     Integer value = Integer.parseInt(properties.getProperty(key));

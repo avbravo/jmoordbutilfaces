@@ -8,8 +8,8 @@ package com.avbravo.jmoordbutils.media;
 
 
 
-import com.avbravo.jmoordbutils.MessagesUtil;
-import static com.avbravo.jmoordbutils.MessagesUtil.errorDialog;
+import com.avbravo.jmoordbutils.FacesUtil;
+import static com.avbravo.jmoordbutils.FacesUtil.errorDialog;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
@@ -314,7 +314,7 @@ public class JMoordbMediaManager implements Serializable {
         return true;
       }
     } catch (Exception e) {
-      MessagesUtil.errorDialog("existsFile()", e.getLocalizedMessage());
+      FacesUtil.errorDialog("existsFile()", e.getLocalizedMessage());
     }
     return false;
   }
