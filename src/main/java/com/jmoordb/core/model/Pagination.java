@@ -17,6 +17,8 @@ public class Pagination {
 
     private Integer page;
     private Integer size;
+    
+    private Integer skip;
 
 
     public Pagination() {

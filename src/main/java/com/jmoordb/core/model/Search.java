@@ -11,11 +11,22 @@ import org.bson.Document;
  * @author avbravo
  */
 public class Search {
+
     Document filter;
     Pagination pagination = new Pagination();
     Sorted sorted = new Sorted();
 
     public Search() {
+    }
+
+    public Search(Document filter) {
+        this.filter = filter;
+    }
+
+    public Search(Document filter, Pagination pagination, Sorted sorted) {
+        this.filter = filter;
+        this.pagination = pagination;
+        this.sorted = sorted;
     }
 
     public Document getFilter() {
@@ -41,6 +52,35 @@ public class Search {
     public void setSorted(Sorted sorted) {
         this.sorted = sorted;
     }
-    
-    
+
+    // <editor-fold defaultstate="collapsed" desc="static class Builder">
+    public static class Builder {
+
+        Document filter;
+        Pagination pagination = new Pagination();
+        Sorted sorted = new Sorted();
+
+        public Builder filter(Document filter) {
+            this.filter = filter;
+            return this;
+        }
+
+        public Builder pagination(Pagination pagination) {
+            this.pagination = pagination;
+            return this;
+        }
+
+        public Builder sorted(Sorted sorted) {
+            this.sorted = sorted;
+            return this;
+        }
+
+        public Search build() {
+            return new Search(
+                    filter, pagination, sorted);
+
+        }
+
+    }
+    // </editor-fold>
 }

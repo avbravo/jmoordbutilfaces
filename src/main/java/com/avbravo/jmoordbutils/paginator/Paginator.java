@@ -7,6 +7,7 @@ package com.avbravo.jmoordbutils.paginator;
 
 import com.avbravo.jmoordbutils.FacesUtil;
 import static com.avbravo.jmoordbutils.FacesUtil.nameOfMethod;
+import com.jmoordb.core.model.Search;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,15 +28,24 @@ public class Paginator {
     private Document query;
     private Document sort;
     private String title;
-     Integer pageforskip = 1;
+    private Integer pageforskip = 1;
+    private Search search;
+    private Boolean isByQuery;
+
+    public Boolean getIsByQuery() {
+        return isByQuery;
+    }
+
+    public void setIsByQuery(Boolean isByQuery) {
+        this.isByQuery = isByQuery;
+    }
+
     List<Integer> pagesPaginator = new ArrayList<>();
 
     public Paginator() {
     }
 
-  
-
-    public Paginator(String nameOfController, Integer page, Integer rowsForPage, Integer numberOfPage, Integer totalRecords, Document query, Document sort, String title) {
+    public Paginator(String nameOfController, Integer page, Integer rowsForPage, Integer numberOfPage, Integer totalRecords, Document query, Document sort, String title, Search search, Boolean isByQuery) {
         this.nameOfController = nameOfController;
         this.page = page;
         this.rowsForPage = rowsForPage;
@@ -44,15 +54,31 @@ public class Paginator {
         this.query = query;
         this.sort = sort;
         this.title = title;
-        //Siempre se debe colocar
-//          JmoordbContext.put("paginator" + nameOfController, this);
+        this.search = search;
+        this.isByQuery = isByQuery;
     }
 
     
     
     
-    
-    
+    public void setSearch(Search search) {
+        this.search = search;
+    }
+
+    public void setPagesPaginator(List<Integer> pagesPaginator) {
+        this.pagesPaginator = pagesPaginator;
+    }
+
+   
+
+   
+
+
+    public Search getSearch() {
+        return search;
+    }
+
+
     public Integer getTotalRecords() {
         return totalRecords;
     }
@@ -61,14 +87,9 @@ public class Paginator {
         this.totalRecords = totalRecords;
     }
 
-    
-    
-    
-    
-    
-   public List<Integer> getPagesPaginator() {
-                           
-    return arrayListOfNumber(getNumberOfPage());
+    public List<Integer> getPagesPaginator() {
+
+        return arrayListOfNumber(getNumberOfPage());
     }
 
     public String getTitle() {
@@ -86,8 +107,6 @@ public class Paginator {
     public void setPageforskip(Integer pageforskip) {
         this.pageforskip = pageforskip;
     }
-
-   
 
     public String getNameOfController() {
         return nameOfController;
@@ -121,9 +140,6 @@ public class Paginator {
         this.numberOfPage = numberOfPage;
     }
 
-    
-    
-    
     public Document getQuery() {
         return query;
     }
@@ -139,17 +155,15 @@ public class Paginator {
     public void setSort(Document sort) {
         this.sort = sort;
     }
-    
-    
-private  List<Integer> arrayListOfNumber(Integer numberOfPage) {
+
+    private List<Integer> arrayListOfNumber(Integer numberOfPage) {
         List<Integer> pages = new ArrayList<>();
         try {
-            
-       pages = IntStream.range(1,numberOfPage+1)
-            .boxed()
-            .collect(Collectors.toList());
-       
-             
+
+            pages = IntStream.range(1, numberOfPage + 1)
+                    .boxed()
+                    .collect(Collectors.toList());
+
             return pages;
 
         } catch (Exception e) {
@@ -174,27 +188,43 @@ private  List<Integer> arrayListOfNumber(Integer numberOfPage) {
         private Document query;
         private Document sort;
         private String title;
+        private Search search;
+        private Boolean isByQuery;
         List<Integer> pagesPaginator = new ArrayList<>();
-         Integer pageforskip = 1;
+        Integer pageforskip = 1;
 
         public Builder nameOfController(String nameOfController) {
             this.nameOfController = nameOfController;
             return this;
         }
 
+        public Builder search(Search search) {
+            this.search = search;
+            return this;
+        }
+
+        public Builder isByQuery(Boolean isByQuery) {
+            this.isByQuery= isByQuery;
+            return this;
+        }
+       
+
         public Builder page(Integer page) {
             this.page = page;
             return this;
         }
+
         public Builder totalRecords(Integer totalRecords) {
             this.totalRecords = totalRecords;
             return this;
         }
+
         public Builder pageforskip(Integer pageforskip) {
-            this.pageforskip =pageforskip;
+            this.pageforskip = pageforskip;
             return this;
         }
-        public Builder pagesPaginator (List<Integer> pagesPaginator ) {
+
+        public Builder pagesPaginator(List<Integer> pagesPaginator) {
             this.pagesPaginator = this.pagesPaginator;
             return this;
         }
@@ -218,14 +248,14 @@ private  List<Integer> arrayListOfNumber(Integer numberOfPage) {
             this.sort = sort;
             return this;
         }
-        
-        public Builder title(String title){
+
+        public Builder title(String title) {
             this.title = title;
             return this;
         }
 
         public Paginator build() {
-            return new Paginator(nameOfController, page, rowsForPage, numberOfPage, totalRecords, query, sort, title);
+            return new Paginator(nameOfController, page, rowsForPage, numberOfPage, totalRecords, query, sort, title, search, isByQuery);
 
         }
     }
