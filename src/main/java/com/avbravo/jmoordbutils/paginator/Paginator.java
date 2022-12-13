@@ -29,23 +29,21 @@ public class Paginator {
     private Document sort;
     private String title;
     private Integer pageforskip = 1;
-    private Search search;
-    private Boolean isByQuery;
+    private String name;
+    
 
-    public Boolean getIsByQuery() {
-        return isByQuery;
-    }
 
-    public void setIsByQuery(Boolean isByQuery) {
-        this.isByQuery = isByQuery;
-    }
 
+
+    
+    
+  
     List<Integer> pagesPaginator = new ArrayList<>();
 
     public Paginator() {
     }
 
-    public Paginator(String nameOfController, Integer page, Integer rowsForPage, Integer numberOfPage, Integer totalRecords, Document query, Document sort, String title, Search search, Boolean isByQuery) {
+    public Paginator(String nameOfController, Integer page, Integer rowsForPage, Integer numberOfPage, Integer totalRecords, Document query, Document sort, String title, String name) {
         this.nameOfController = nameOfController;
         this.page = page;
         this.rowsForPage = rowsForPage;
@@ -54,16 +52,21 @@ public class Paginator {
         this.query = query;
         this.sort = sort;
         this.title = title;
-        this.search = search;
-        this.isByQuery = isByQuery;
+        this.name = name;
     }
 
-    
-    
-    
-    public void setSearch(Search search) {
-        this.search = search;
+    public String getName() {
+        return name;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+  
+    
+
+
 
     public void setPagesPaginator(List<Integer> pagesPaginator) {
         this.pagesPaginator = pagesPaginator;
@@ -71,13 +74,7 @@ public class Paginator {
 
    
 
-   
-
-
-    public Search getSearch() {
-        return search;
-    }
-
+  
 
     public Integer getTotalRecords() {
         return totalRecords;
@@ -188,8 +185,10 @@ public class Paginator {
         private Document query;
         private Document sort;
         private String title;
-        private Search search;
-        private Boolean isByQuery;
+        private String name;
+ 
+   
+
         List<Integer> pagesPaginator = new ArrayList<>();
         Integer pageforskip = 1;
 
@@ -197,18 +196,16 @@ public class Paginator {
             this.nameOfController = nameOfController;
             return this;
         }
+   
+     
 
-        public Builder search(Search search) {
-            this.search = search;
-            return this;
-        }
-
-        public Builder isByQuery(Boolean isByQuery) {
-            this.isByQuery= isByQuery;
-            return this;
-        }
+      
        
 
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
         public Builder page(Integer page) {
             this.page = page;
             return this;
@@ -255,7 +252,7 @@ public class Paginator {
         }
 
         public Paginator build() {
-            return new Paginator(nameOfController, page, rowsForPage, numberOfPage, totalRecords, query, sort, title, search, isByQuery);
+            return new Paginator(nameOfController, page, rowsForPage, numberOfPage, totalRecords, query, sort, title, name);
 
         }
     }

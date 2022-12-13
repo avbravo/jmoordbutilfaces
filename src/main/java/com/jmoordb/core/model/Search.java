@@ -53,10 +53,13 @@ public class Search {
         this.sorted = sorted;
     }
 
+    
+    
     // <editor-fold defaultstate="collapsed" desc="static class Builder">
-    public static class Builder {
+   
 
-        Document filter;
+     public static class Builder {
+         Document filter;
         Pagination pagination = new Pagination();
         Sorted sorted = new Sorted();
 
@@ -80,7 +83,6 @@ public class Search {
                     filter, pagination, sorted);
 
         }
-
-    }
-    // </editor-fold>
+     }
+         // </editor-fold>
 }

@@ -267,21 +267,17 @@ public interface IPaginator {
                 }
             }
 
-            if (paginatorOld.getIsByQuery()) {
+
                 if (paginatorOld.getQuery() == null || paginatorOld.getQuery().equals("")) {
                     paginatorOld = paginator;
                 }
-            } else {
-                if (paginatorOld.getSearch() == null || paginatorOld.getSearch().getFilter().equals("")) {
-                    paginatorOld = paginator;
-                }
-            }
+           
 
             if (offset == 0) {
                 paginator.setPage(1);
             } else {
 
-                if (paginatorOld.getIsByQuery()) {
+          
                     if (paginatorOld.getQuery().equals(paginator.getQuery())) {
                         paginator.setPage((offset / rowPage) + 1);
 
@@ -289,15 +285,7 @@ public interface IPaginator {
                         paginatorOld = paginator;
                         paginator.setPage(1);
                     }
-                } else {
-                    if (paginatorOld.getSearch().equals(paginator.getSearch())) {
-                        paginator.setPage((offset / rowPage) + 1);
-
-                    } else {
-                        paginatorOld = paginator;
-                        paginator.setPage(1);
-                    }
-                }
+               
 
             }
 
