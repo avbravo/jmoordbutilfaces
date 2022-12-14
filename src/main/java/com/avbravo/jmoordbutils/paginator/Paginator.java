@@ -20,7 +20,7 @@ import org.bson.Document;
  */
 public class Paginator {
 
-    private String nameOfController;
+
     private Integer page;
     private Integer rowsForPage;
     private Integer numberOfPage;
@@ -30,21 +30,14 @@ public class Paginator {
     private String title;
     private Integer pageforskip = 1;
     private String name;
-    
-
-
-
-
-    
-    
-  
+      
     List<Integer> pagesPaginator = new ArrayList<>();
 
     public Paginator() {
     }
 
-    public Paginator(String nameOfController, Integer page, Integer rowsForPage, Integer numberOfPage, Integer totalRecords, Document query, Document sort, String title, String name) {
-        this.nameOfController = nameOfController;
+    public Paginator(Integer page, Integer rowsForPage, Integer numberOfPage, Integer totalRecords, Document query, Document sort, String title, String name) {
+  
         this.page = page;
         this.rowsForPage = rowsForPage;
         this.numberOfPage = numberOfPage;
@@ -105,13 +98,7 @@ public class Paginator {
         this.pageforskip = pageforskip;
     }
 
-    public String getNameOfController() {
-        return nameOfController;
-    }
-
-    public void setNameOfController(String nameOfController) {
-        this.nameOfController = nameOfController;
-    }
+   
 
     public Integer getPage() {
         return page;
@@ -175,9 +162,31 @@ public class Paginator {
         return pages;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Paginator{");
+        sb.append(", \n\t page=").append(page);
+        sb.append(", \n\t rowsForPage=").append(rowsForPage);
+        sb.append(", \n\t numberOfPage=").append(numberOfPage);
+        sb.append(", \n\t totalRecords=").append(totalRecords);
+        sb.append(", \n\t query=").append(query);
+        sb.append(", \n\t sort=").append(sort);
+        sb.append(", \n\t title=").append(title);
+        sb.append(", \n\t pageforskip=").append(pageforskip);
+        sb.append(", \n\t name=").append(name);
+        sb.append(", \n\t pagesPaginator=").append(pagesPaginator);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    
+    
+    
+    
     public static class Builder {
 
-        private String nameOfController;
+
         private Integer page;
         private Integer rowsForPage;
         private Integer numberOfPage;
@@ -192,10 +201,6 @@ public class Paginator {
         List<Integer> pagesPaginator = new ArrayList<>();
         Integer pageforskip = 1;
 
-        public Builder nameOfController(String nameOfController) {
-            this.nameOfController = nameOfController;
-            return this;
-        }
    
      
 
@@ -252,7 +257,7 @@ public class Paginator {
         }
 
         public Paginator build() {
-            return new Paginator(nameOfController, page, rowsForPage, numberOfPage, totalRecords, query, sort, title, name);
+            return new Paginator(page, rowsForPage, numberOfPage, totalRecords, query, sort, title, name);
 
         }
     }

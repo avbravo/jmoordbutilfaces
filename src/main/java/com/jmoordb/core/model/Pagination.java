@@ -56,6 +56,21 @@ public class Pagination {
         return page;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Pagination{");
+        sb.append("page=").append(page);
+        sb.append(", size=").append(size);
+        sb.append(", skip=").append(skip);
+        sb.append('}');
+        return sb.toString();
+    }
+    
+    
+    
+    
+
     // <editor-fold defaultstate="collapsed" desc="Integer skip()">
     public Integer skip() {
         Integer result = 0;
