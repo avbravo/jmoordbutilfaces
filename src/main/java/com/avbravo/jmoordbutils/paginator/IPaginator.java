@@ -255,7 +255,7 @@ public interface IPaginator {
                 field = e.getValue().getField();
                 sortOder = e.getValue().getOrder();
                 if (sortOder.isAscending()) {
-                    paginator.setSort(new Document(field, 1));
+                   paginator.setSort(new Document(field, 1));
                 } else {
                     if (sortOder.isDescending()) {
                         paginator.setSort(new Document(field, -1));
