@@ -8,6 +8,7 @@ package com.avbravo.jmoordbutils.paginator;
 import com.avbravo.jmoordbutils.DateUtil;
 import com.avbravo.jmoordbutils.FacesUtil;
 import static com.avbravo.jmoordbutils.FacesUtil.nameOfMethod;
+import com.jmoordb.core.model.Sorted;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -255,37 +256,42 @@ public interface IPaginator {
                 field = e.getValue().getField();
                 sortOder = e.getValue().getOrder();
                 if (sortOder.isAscending()) {
-                   paginator.setSort(new Document(field, 1));
+                    //    paginator.setSort(new Document(field, 1));
+
+                    Sorted sorted = new Sorted(new Document(field, 1));
+                    paginator.setSorted(sorted);
                 } else {
                     if (sortOder.isDescending()) {
-                        paginator.setSort(new Document(field, -1));
+//                          paginator.setSort(new Document(field, -1));
+                        Sorted sorted = new Sorted(new Document(field, -1));
+                        paginator.setSorted(sorted);
                     } else {
                         if (sortOder.isUnsorted()) {
-                            paginator.setSort(new Document(new Document()));
+//                            paginator.setSort(new Document(new Document()));
+                            Sorted sorted = new Sorted(new Document());
+                            paginator.setSorted(sorted);
                         }
                     }
                 }
             }
 
-
-                if (paginatorOld.getQuery() == null || paginatorOld.getQuery().equals("")) {
-                    paginatorOld = paginator;
-                }
-           
+//            if (paginatorOld.getQuery() == null || paginatorOld.getQuery().equals("")) {
+            if (paginatorOld.getId() == null || paginatorOld.getId().equals("")) {
+                paginatorOld = paginator;
+            }
 
             if (offset == 0) {
                 paginator.setPage(1);
             } else {
 
-          
-                    if (paginatorOld.getQuery().equals(paginator.getQuery())) {
-                        paginator.setPage((offset / rowPage) + 1);
+//                if (paginatorOld.getQuery().equals(paginator.getQuery())) {
+                if (paginatorOld.getId().equals(paginator.getId())) {
+                    paginator.setPage((offset / rowPage) + 1);
 
-                    } else {
-                        paginatorOld = paginator;
-                        paginator.setPage(1);
-                    }
-               
+                } else {
+                    paginatorOld = paginator;
+                    paginator.setPage(1);
+                }
 
             }
 

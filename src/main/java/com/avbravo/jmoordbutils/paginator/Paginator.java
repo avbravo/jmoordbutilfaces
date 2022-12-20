@@ -7,7 +7,7 @@ package com.avbravo.jmoordbutils.paginator;
 
 import com.avbravo.jmoordbutils.FacesUtil;
 import static com.avbravo.jmoordbutils.FacesUtil.nameOfMethod;
-import com.jmoordb.core.model.Search;
+import com.jmoordb.core.model.Sorted;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,34 +20,53 @@ import org.bson.Document;
  */
 public class Paginator {
 
-
     private Integer page;
     private Integer rowsForPage;
     private Integer numberOfPage;
     private Integer totalRecords;
-    private Document query;
-    private Document sort;
+//    private Document query;
+//    private Document sort;
     private String title;
     private Integer pageforskip = 1;
     private String name;
-      
+    private String id;
+    private Sorted sorted;
+
     List<Integer> pagesPaginator = new ArrayList<>();
 
     public Paginator() {
     }
 
-    public Paginator(Integer page, Integer rowsForPage, Integer numberOfPage, Integer totalRecords, Document query, Document sort, String title, String name) {
-  
+    public Paginator(Integer page, Integer rowsForPage, Integer numberOfPage, Integer totalRecords, String title, String name, String id, Sorted sorted) {
         this.page = page;
         this.rowsForPage = rowsForPage;
         this.numberOfPage = numberOfPage;
         this.totalRecords = totalRecords;
-        this.query = query;
-        this.sort = sort;
         this.title = title;
         this.name = name;
+        this.id = id;
+        this.sorted = sorted;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Sorted getSorted() {
+        return sorted;
+    }
+
+    public void setSorted(Sorted sorted) {
+        this.sorted = sorted;
+    }
+
+    
+    
+    
     public String getName() {
         return name;
     }
@@ -56,18 +75,9 @@ public class Paginator {
         this.name = name;
     }
 
-  
-    
-
-
-
     public void setPagesPaginator(List<Integer> pagesPaginator) {
         this.pagesPaginator = pagesPaginator;
     }
-
-   
-
-  
 
     public Integer getTotalRecords() {
         return totalRecords;
@@ -98,8 +108,6 @@ public class Paginator {
         this.pageforskip = pageforskip;
     }
 
-   
-
     public Integer getPage() {
         return page;
     }
@@ -124,22 +132,21 @@ public class Paginator {
         this.numberOfPage = numberOfPage;
     }
 
-    public Document getQuery() {
-        return query;
-    }
-
-    public void setQuery(Document query) {
-        this.query = query;
-    }
-
-    public Document getSort() {
-        return sort;
-    }
-
-    public void setSort(Document sort) {
-        this.sort = sort;
-    }
-
+//    public Document getQuery() {
+//        return query;
+//    }
+//
+//    public void setQuery(Document query) {
+//        this.query = query;
+//    }
+//
+//    public Document getSort() {
+//        return sort;
+//    }
+//
+//    public void setSort(Document sort) {
+//        this.sort = sort;
+//    }
     private List<Integer> arrayListOfNumber(Integer numberOfPage) {
         List<Integer> pages = new ArrayList<>();
         try {
@@ -170,8 +177,7 @@ public class Paginator {
         sb.append(", \n\t rowsForPage=").append(rowsForPage);
         sb.append(", \n\t numberOfPage=").append(numberOfPage);
         sb.append(", \n\t totalRecords=").append(totalRecords);
-        sb.append(", \n\t query=").append(query);
-        sb.append(", \n\t sort=").append(sort);
+        sb.append(", \n\t sorted.getSort(=").append(sorted.getSort());
         sb.append(", \n\t title=").append(title);
         sb.append(", \n\t pageforskip=").append(pageforskip);
         sb.append(", \n\t name=").append(name);
@@ -180,39 +186,38 @@ public class Paginator {
         return sb.toString();
     }
 
-    
-    
-    
-    
     public static class Builder {
-
 
         private Integer page;
         private Integer rowsForPage;
         private Integer numberOfPage;
         private Integer totalRecords;
-        private Document query;
-        private Document sort;
+//        private Document query;
+//        private Document sort;
         private String title;
         private String name;
- 
-   
+
+        private String id;
+        private Sorted sorted;
 
         List<Integer> pagesPaginator = new ArrayList<>();
         Integer pageforskip = 1;
-
-   
-     
-
-      
-       
 
         public Builder name(String name) {
             this.name = name;
             return this;
         }
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
         public Builder page(Integer page) {
             this.page = page;
+            return this;
+        }
+        public Builder sorted(Sorted sorted) {
+            this.sorted = sorted;
             return this;
         }
 
@@ -241,15 +246,15 @@ public class Paginator {
             return this;
         }
 
-        public Builder query(Document query) {
-            this.query = query;
-            return this;
-        }
-
-        public Builder sort(Document sort) {
-            this.sort = sort;
-            return this;
-        }
+//        public Builder query(Document query) {
+//            this.query = query;
+//            return this;
+//        }
+//
+//        public Builder sort(Document sort) {
+//            this.sort = sort;
+//            return this;
+//        }
 
         public Builder title(String title) {
             this.title = title;
@@ -257,7 +262,10 @@ public class Paginator {
         }
 
         public Paginator build() {
-            return new Paginator(page, rowsForPage, numberOfPage, totalRecords, query, sort, title, name);
+//            return new Paginator(page, rowsForPage, numberOfPage, totalRecords, query, sort, title, name);
+id = FacesUtil.getUUID();
+            return new Paginator(page, rowsForPage, numberOfPage, totalRecords, title, name, id, sorted);
+            
 
         }
     }
