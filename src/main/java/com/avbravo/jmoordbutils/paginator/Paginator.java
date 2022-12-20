@@ -177,7 +177,7 @@ public class Paginator {
         sb.append(", \n\t rowsForPage=").append(rowsForPage);
         sb.append(", \n\t numberOfPage=").append(numberOfPage);
         sb.append(", \n\t totalRecords=").append(totalRecords);
-        sb.append(", \n\t sorted.getSort(=").append(sorted.getSort());
+//       sb.append(", \n\t sorted.getSort(=").append(sorted.getSort().toJson());
         sb.append(", \n\t title=").append(title);
         sb.append(", \n\t pageforskip=").append(pageforskip);
         sb.append(", \n\t name=").append(name);
