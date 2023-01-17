@@ -47,7 +47,7 @@ public class JmoordbResourcesFiles implements Serializable {
         currentLocale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
         mrb = ResourceBundle.getBundle(pathproperties,
                 currentLocale);
-        arb = ResourceBundle.getBundle("com.jmoordbutils.properties.application",
+        arb = ResourceBundle.getBundle("com.jmoordbutilfaces.properties.application",
                 currentLocale);
     }
 
