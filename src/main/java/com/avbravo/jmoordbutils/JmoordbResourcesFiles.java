@@ -24,16 +24,10 @@ public class JmoordbResourcesFiles implements Serializable {
     private static final long serialVersionUID = 1L;
     Locale currentLocale;
     ResourceBundle mrb; //for messages atributos
-    ResourceBundle arb; //for application
-    String pathproperties="com.properties.messages";
-
-    public String getPathproperties() {
-        return pathproperties;
-    }
-
-    public void setPathproperties(String pathproperties) {
-        this.pathproperties = pathproperties;
-    }
+    ResourceBundle crb; //for application
+    ResourceBundle corerb; //for core
+    String pathMessagesProperties = "com.properties.messages";
+    String pathConfigurationProperties = "com.properties.configuration";
 
     public JmoordbResourcesFiles() {
     }
@@ -45,11 +39,38 @@ public class JmoordbResourcesFiles implements Serializable {
 
     public void saveLocale() {
         currentLocale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
-        mrb = ResourceBundle.getBundle(pathproperties,
-                currentLocale);
-        arb = ResourceBundle.getBundle("com.jmoordbutilfaces.properties.application",
-                currentLocale);
+        mrb = ResourceBundle.getBundle(pathMessagesProperties, currentLocale);
+        crb = ResourceBundle.getBundle(pathConfigurationProperties, currentLocale);
+        corerb = ResourceBundle.getBundle("com.jmoordbutilfaces.properties.core", currentLocale);
     }
+
+  
+
+    public String getPathMessagesProperties() {
+        return pathMessagesProperties;
+    }
+
+    public void setPathMessagesProperties(String pathMessagesProperties) {
+        this.pathMessagesProperties = pathMessagesProperties;
+    }
+
+    public ResourceBundle getCrb() {
+        return crb;
+    }
+
+    public void setCrb(ResourceBundle crb) {
+        this.crb = crb;
+    }
+
+    public String getPathConfigurationProperties() {
+        return pathConfigurationProperties;
+    }
+
+    public void setPathConfigurationProperties(String pathConfigurationProperties) {
+        this.pathConfigurationProperties = pathConfigurationProperties;
+    }
+
+  
 
     public Locale getCurrentLocale() {
         return currentLocale;
@@ -59,6 +80,14 @@ public class JmoordbResourcesFiles implements Serializable {
         this.currentLocale = currentLocale;
     }
 
+    
+      public ResourceBundle getCorerb() {
+        return corerb;
+    }
+
+    public void setCorerb(ResourceBundle corerb) {
+        this.corerb = corerb;
+    }
     public ResourceBundle getMrb() {
         return mrb;
     }
@@ -67,28 +96,26 @@ public class JmoordbResourcesFiles implements Serializable {
         this.mrb = mrb;
     }
 
-    public ResourceBundle getArb() {
-        return arb;
-    }
-
-    public void setArb(ResourceBundle arb) {
-        this.arb = arb;
-    }
+  
 
     /*
      *Devuelve el mensaje Mrb
      */
-
-    public String getMessage(String mensaje) {
+    public String fromMessage(String mensaje) {
         return mrb.getString(mensaje);
     }
 
     /*
      *Devuelve el mensaje Arb
      */
-
-    public String getAppMessage(String mensaje) {
-        return arb.getString(mensaje);
+    public String fromConfiguration(String mensaje) {
+        return crb.getString(mensaje);
+    }
+    /*
+     *Devuelve el mensaje Arb
+     */
+    public String fromCore(String mensaje) {
+        return corerb.getString(mensaje);
     }
 
 }
