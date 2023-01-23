@@ -22,7 +22,7 @@ import static com.diogonunes.jcolor.Attribute.YELLOW_TEXT;
  * @author avbravo
  */
 public class ConsoleUtil {
-    // <editor-fold defaultstate="collapsed" desc="void consoleInfo(String text)">
+    // <editor-fold defaultstate="collapsed" desc="void info(String text)">
     public static void info(String text) {
         try {
             AnsiFormat fInfo = new AnsiFormat(CYAN_TEXT());
@@ -32,7 +32,17 @@ public class ConsoleUtil {
         }
     }
 // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="consoleNormal(String text)">
+    // <editor-fold defaultstate="collapsed" desc="void test(String text)">
+    public static void test(String text) {
+        try {
+            AnsiFormat fInfo = new AnsiFormat(CYAN_TEXT());
+            System.out.println(fInfo.format(text));
+        } catch (Exception e) {
+            FacesUtil.errorMessage(nameOfMethod() + " " + e.getLocalizedMessage());
+        }
+    }
+// </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="normal(String text)">
 
     public static void normal(String text) {
         try {
@@ -43,7 +53,7 @@ public class ConsoleUtil {
         }
     }
 // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="void consoleError(String text)">
+    // <editor-fold defaultstate="collapsed" desc="void error(String text)">
 
     public static void error(String text) {
         try {
@@ -54,7 +64,7 @@ public class ConsoleUtil {
         }
     }
 // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc=" void consoleWarning(String text)">
+    // <editor-fold defaultstate="collapsed" desc=" void warning(String text)">
 
     public static void warning(String text) {
         try {
@@ -65,7 +75,7 @@ public class ConsoleUtil {
         }
     }
 // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc=" void consoleGreenBackground(String text)">
+    // <editor-fold defaultstate="collapsed" desc=" void greenBackground(String text)">
 
     public static void greenBackground(String text) {
         try {
@@ -75,7 +85,7 @@ public class ConsoleUtil {
         }
     }
 // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="  void consoleRedBackground(String text)">
+    // <editor-fold defaultstate="collapsed" desc="  void redBackground(String text)">
 
     public static void redBackground(String text) {
         try {
