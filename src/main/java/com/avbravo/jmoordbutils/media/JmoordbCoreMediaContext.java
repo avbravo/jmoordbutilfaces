@@ -5,15 +5,23 @@
  */
 package com.avbravo.jmoordbutils.media;
 
-import static com.avbravo.jmoordbutils.FacesUtil.errorMessage;
+import com.avbravo.jmoordbutils.FacesUtil;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.context.FacesContext;
+
+import jakarta.inject.Named;
+import java.io.Serializable;
 
 /**
  *
  * @author avbravo
  */
-public class JmoordbMediaContext {
-
+@Named
+@RequestScoped
+public class JmoordbCoreMediaContext  implements Serializable {
+// <editor-fold defaultstate="collapsed" desc="field">
+        private static final long serialVersionUID = 1L;
+// </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="void put(String key, Object value)">
     /**
      * guarda en el session
@@ -24,7 +32,7 @@ public class JmoordbMediaContext {
         try{
              FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(key, value);
         }catch(Exception e){
-              errorMessage("put()" + " " + e.getLocalizedMessage());
+          FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
         }  
       
        
@@ -36,7 +44,7 @@ public class JmoordbMediaContext {
         try{
              FacesContext.getCurrentInstance().getExternalContext().getApplicationMap().put(key, value);
         }catch(Exception e){
-             errorMessage("put()" + " " + e.getLocalizedMessage());
+        FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
         }  
       
        
@@ -48,7 +56,7 @@ public class JmoordbMediaContext {
         try{
              return FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(key);
         }catch(Exception e){
-          errorMessage("get()" + " " + e.getLocalizedMessage());
+        FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
         }  
       
        return "";
@@ -64,7 +72,7 @@ public class JmoordbMediaContext {
         try{
              return FacesContext.getCurrentInstance().getExternalContext().getApplicationMap().get(key);
         }catch(Exception e){
-             errorMessage("getApplication()" + " " + e.getLocalizedMessage());
+           FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
         }  
       
        return "";

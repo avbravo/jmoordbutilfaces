@@ -8,6 +8,7 @@ package com.avbravo.jmoordbutils.media;
 
 
 
+import com.avbravo.jmoordbutils.ConsoleUtil;
 import com.avbravo.jmoordbutils.FacesUtil;
 import static com.avbravo.jmoordbutils.FacesUtil.errorDialog;
 import jakarta.annotation.PostConstruct;
@@ -26,10 +27,11 @@ import org.primefaces.model.StreamedContent;
  *
  * @author avbravo
  */
-@Named(value ="jMoordbMediaManager" )
+@Named
 @RequestScoped
-public class JMoordbMediaManager implements Serializable {
+public class JmoordbCoreMediaManager implements Serializable {
 // <editor-fold defaultstate="collapsed" desc="field">
+        private static final long serialVersionUID = 1L;
     private StreamedContent media;
 
     InputStream is = null;
@@ -62,7 +64,7 @@ public class JMoordbMediaManager implements Serializable {
     public void init() {
         try {
    
- String fileDownloadPath = (String) JmoordbMediaContext.get("pathOfFile");
+ String fileDownloadPath = (String) JmoordbCoreMediaContext.get("pathOfFile");
            
             if (fileDownloadPath == null || fileDownloadPath.equals("")) {
 //                System.out.println("Es null en el context");
@@ -80,7 +82,7 @@ public class JMoordbMediaManager implements Serializable {
         // <editor-fold defaultstate="collapsed" desc="StreamedContent generate(String pathFile)">
     public StreamedContent generate(String pathFile) {
         try {
-          
+            
             String name = nameOfFileInPath(pathFile);
             String pathOfFile =pathOfFile(pathFile);
             String extensionOfFileInPath = extensionOfFileInPath(pathFile);
@@ -97,8 +99,7 @@ public class JMoordbMediaManager implements Serializable {
                     .stream(() -> is)
                     .build();
         } catch (Exception e) {
-            System.out.println("generate() " + e.getLocalizedMessage());
-       //     JsfUtil.errorMessage("generateImage()" + e.getLocalizedMessage());
+         FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
         }
 
         return media;
@@ -145,7 +146,7 @@ public class JMoordbMediaManager implements Serializable {
                System.out.println("Esta extesnsion"+extension + " no es soportada...");
         }
         } catch (Exception e) {
-            System.out.println("typeOfMimeTypeForDownload() "+e.getLocalizedMessage());
+           FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return text;
     }
@@ -162,7 +163,7 @@ public class JMoordbMediaManager implements Serializable {
             name = filenamePath.substring(filenamePath.lastIndexOf(System.getProperty("file.separator")) + 1,
                     filenamePath.lastIndexOf('.'));
         } catch (Exception e) {
-            errorDialog("nameOfFileInPath()", e.getLocalizedMessage());
+           FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return name;
         
@@ -180,7 +181,7 @@ public class JMoordbMediaManager implements Serializable {
         try {
             path = filenamePath.substring(0, filenamePath.lastIndexOf(System.getProperty("file.separator")));
         } catch (Exception e) {
-            errorDialog("pathOfFile()", e.getLocalizedMessage());
+          FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return path;
     }
@@ -197,7 +198,7 @@ public class JMoordbMediaManager implements Serializable {
         try {
             extension = filenamePath.substring(filenamePath.lastIndexOf('.') + 1, filenamePath.length());
         } catch (Exception e) {
-             errorDialog("extensionOfFileInPathe()", e.getLocalizedMessage());
+          FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return extension;
     }
@@ -219,7 +220,7 @@ public class JMoordbMediaManager implements Serializable {
                 path = filenamePath[0];
 
             }else{
-                 path = (String) JmoordbMediaContext.get("pathOfFile");
+                 path = (String) JmoordbCoreMediaContext.get("pathOfFile");
 
             if (path== null || path.equals("")) {
                 path="";
@@ -235,7 +236,7 @@ public class JMoordbMediaManager implements Serializable {
             
             
         } catch (Exception e) {
-             errorDialog("isImage()", e.getLocalizedMessage());
+             FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return valid;
     }
@@ -257,7 +258,7 @@ public class JMoordbMediaManager implements Serializable {
                 path = filenamePath[0];
 
             }else{
-                 path = (String) JmoordbMediaContext.get("pathOfFile");
+                 path = (String) JmoordbCoreMediaContext.get("pathOfFile");
 
             if (path== null || path.equals("")) {
                 path="";
@@ -273,7 +274,7 @@ public class JMoordbMediaManager implements Serializable {
             
             
         } catch (Exception e) {
-             errorDialog("isPDF()", e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return valid;
     }
@@ -292,7 +293,7 @@ public class JMoordbMediaManager implements Serializable {
             }
          return true;
         } catch (Exception e) {
-              errorDialog("isValid()", e.getLocalizedMessage());
+           FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return false;
     }
@@ -314,7 +315,7 @@ public class JMoordbMediaManager implements Serializable {
         return true;
       }
     } catch (Exception e) {
-      FacesUtil.errorDialog("existsFile()", e.getLocalizedMessage());
+     FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
     }
     return false;
   }
