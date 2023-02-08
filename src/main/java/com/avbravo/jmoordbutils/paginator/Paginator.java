@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 /**
  *
@@ -24,8 +25,8 @@ public class Paginator {
     private Integer rowsForPage;
     private Integer numberOfPage;
     private Integer totalRecords;
-//    private Document query;
-//    private Document sort;
+    private  Bson filter;
+    private Document sort;
     private String title;
     private Integer pageforskip = 1;
     private String name;
@@ -47,6 +48,37 @@ public class Paginator {
         this.id = id;
         this.sorted = sorted;
     }
+
+    public Paginator(Integer page, Integer rowsForPage, Integer numberOfPage, Integer totalRecords, Bson filter, Document sort, String title, String name, String id, Sorted sorted) {
+        this.page = page;
+        this.rowsForPage = rowsForPage;
+        this.numberOfPage = numberOfPage;
+        this.totalRecords = totalRecords;
+        this.filter = filter;
+        this.sort = sort;
+        this.title = title;
+        this.name = name;
+        this.id = id;
+        this.sorted = sorted;
+    }
+
+    public Bson getFilter() {
+        return filter;
+    }
+
+    public void setFilter(Bson filter) {
+        this.filter = filter;
+    }
+
+    public Document getSort() {
+        return sort;
+    }
+
+    public void setSort(Document sort) {
+        this.sort = sort;
+    }
+    
+    
 
     public String getId() {
         return id;
@@ -192,13 +224,14 @@ public class Paginator {
         private Integer rowsForPage;
         private Integer numberOfPage;
         private Integer totalRecords;
-//        private Document query;
-//        private Document sort;
+   private  Bson filter;
+    private Document sort;
         private String title;
         private String name;
 
         private String id;
         private Sorted sorted;
+        
 
         List<Integer> pagesPaginator = new ArrayList<>();
         Integer pageforskip = 1;
@@ -209,6 +242,14 @@ public class Paginator {
         }
         public Builder id(String id) {
             this.id = id;
+            return this;
+        }
+        public Builder filter(Bson filter) {
+            this.filter = filter;
+            return this;
+        }
+        public Builder sort(Document sort) {
+            this.sort = sort;
             return this;
         }
 
@@ -264,7 +305,7 @@ public class Paginator {
         public Paginator build() {
 //            return new Paginator(page, rowsForPage, numberOfPage, totalRecords, query, sort, title, name);
 id = FacesUtil.getUUID();
-            return new Paginator(page, rowsForPage, numberOfPage, totalRecords, title, name, id, sorted);
+            return new Paginator(page, rowsForPage, numberOfPage, totalRecords, filter, sort, title, name, id, sorted);
             
 
         }
