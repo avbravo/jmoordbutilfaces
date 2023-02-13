@@ -256,18 +256,18 @@ public interface IPaginator {
                 field = e.getValue().getField();
                 sortOder = e.getValue().getOrder();
                 if (sortOder.isAscending()) {
-                    //    paginator.setSort(new Document(field, 1));
+                 paginator.setSort(new Document(field, 1));
 
                     Sorted sorted = new Sorted(new Document(field, 1));
                     paginator.setSorted(sorted);
                 } else {
                     if (sortOder.isDescending()) {
-//                          paginator.setSort(new Document(field, -1));
+                         paginator.setSort(new Document(field, -1));
                         Sorted sorted = new Sorted(new Document(field, -1));
                         paginator.setSorted(sorted);
                     } else {
                         if (sortOder.isUnsorted()) {
-//                            paginator.setSort(new Document(new Document()));
+                           paginator.setSort(new Document(new Document()));
                             Sorted sorted = new Sorted(new Document());
                             paginator.setSorted(sorted);
                         }
