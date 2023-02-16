@@ -43,9 +43,9 @@ import java.util.regex.Pattern;
  *
  * @authoravbravo
  */
-public class DateUtil implements Serializable { 
+public class DateUtil implements Serializable {
 
-    private static final Logger LOG = Logger.getLogger( DateUtil.class.getName());
+    private static final Logger LOG = Logger.getLogger(DateUtil.class.getName());
     private static final String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
 
     // static Pattern object, since pattern is fixed
@@ -307,10 +307,45 @@ public class DateUtil implements Serializable {
         try {
 //            Date fechainiciot = converterDate(fechainicio);
 //                    Date fechafint = converterDate(fechafin);
+            ConsoleUtil.error("[fechaToSearch " + fechaToSearch
+                    + "\nfechaInicio" + fechainicio
+                    + "\fechafin " + fechafin + "]");
+
+            ConsoleUtil.info(".........................................");
+            ConsoleUtil.info("\tif(fechaToSearch.equals(fechainicio))");
+            if (fechaToSearch.equals(fechainicio)) {
+                ConsoleUtil.info("\t\tyes");
+            } else {
+                ConsoleUtil.info("\t\tno");
+            }
+            ConsoleUtil.info("\t if(fechaToSearch.equals(fechafin))");
+            if (fechaToSearch.equals(fechafin)) {
+                ConsoleUtil.info("\t\tyes");
+            } else {
+                ConsoleUtil.info("\t\tno");
+            }
+                   ConsoleUtil.info("\t if (fechaToSearch.after(fechainicio)) ");
+            if (fechaToSearch.after(fechainicio)) {
+                ConsoleUtil.info("\t\tyes");
+            } else {
+                ConsoleUtil.info("\t\tno");
+            }
+               ConsoleUtil.info("\t if (fechaToSearch.before(fechafin))");
+            if (fechaToSearch.before(fechafin)) {
+                ConsoleUtil.info("\t\tyes");
+            } else {
+                ConsoleUtil.info("\t\tno");
+            }
+
+            ConsoleUtil.info("\tValidation all");
             if (fechaToSearch.equals(fechainicio) || fechaToSearch.equals(fechafin) || (fechaToSearch.after(fechainicio) && fechaToSearch.before(fechafin))) {
+                ConsoleUtil.info("\t\tyes");
                 return true;
+            }else{
+                  ConsoleUtil.info("\t\tno");
             }
         } catch (Exception e) {
+            System.out.println("error() "+e.getLocalizedMessage());
         }
         return false;
     }
@@ -1126,10 +1161,6 @@ public class DateUtil implements Serializable {
 
         return date;
     }// </editor-fold>
-    
-    
-    
-    
 
     // <editor-fold defaultstate="collapsed" desc="sumarMesaFecha(date,mes)"> 
     /**
@@ -1154,45 +1185,45 @@ public class DateUtil implements Serializable {
         }
         return dateresult;
     }// </editor-fold>
-   
 
-     // <editor-fold defaultstate="collapsed" desc="Date sumarHorasFecha(Date date, int horas)"> 
-    public static Date sumarHorasAFecha(Date date, int horas){
-	
-      Calendar calendar = Calendar.getInstance();
+    // <editor-fold defaultstate="collapsed" desc="Date sumarHorasFecha(Date date, int horas)"> 
+    public static Date sumarHorasAFecha(Date date, int horas) {
 
-      calendar.setTime(date); // Configuramos la fecha que se recibe
-	
-      calendar.add(Calendar.HOUR, horas);  // numero de horas a añadir, o restar en caso de horas<0
-	
-      return calendar.getTime(); // Devuelve el objeto Date con las nuevas horas añadidas
-	
- }
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.setTime(date); // Configuramos la fecha que se recibe
+
+        calendar.add(Calendar.HOUR, horas);  // numero de horas a añadir, o restar en caso de horas<0
+
+        return calendar.getTime(); // Devuelve el objeto Date con las nuevas horas añadidas
+
+    }
+
     // </editor-fold>
-     // <editor-fold defaultstate="collapsed" desc="Date sumarMinutosFecha(Date date, int minutos)"> 
-    public static Date sumarMinutosAFecha(Date date, int minutos){
-	
-      Calendar calendar = Calendar.getInstance();
+    // <editor-fold defaultstate="collapsed" desc="Date sumarMinutosFecha(Date date, int minutos)"> 
+    public static Date sumarMinutosAFecha(Date date, int minutos) {
 
-      calendar.setTime(date); // Configuramos la fecha que se recibe
-	
-      calendar.add(Calendar.MINUTE, minutos);  // numero de horas a añadir, o restar en caso de horas<0
-	
-      return calendar.getTime(); // Devuelve el objeto Date con las nuevas horas añadidas
-	
- }
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.setTime(date); // Configuramos la fecha que se recibe
+
+        calendar.add(Calendar.MINUTE, minutos);  // numero de horas a añadir, o restar en caso de horas<0
+
+        return calendar.getTime(); // Devuelve el objeto Date con las nuevas horas añadidas
+
+    }
+
     // </editor-fold>
-     // <editor-fold defaultstate="collapsed" desc="Date sumarSegundosFecha(Date date, int horas, int minutos,  int segundos)"> 
-    public static Date sumarMesDiasHorasMinutosSegundosAFecha(Date date,int mes, int dias, int horas, int minutos,  int segundos){
-	       LocalDateTime ld=convertToLocalDateTimeViaInstant(date);
-               
-               ld.plusMonths(mes);
-               ld.plusDays(dias);
-               ld.plusHours(horas);
-               ld.plusMinutes(minutos);
-               ld.plusSeconds(segundos);
-            
-        
+    // <editor-fold defaultstate="collapsed" desc="Date sumarSegundosFecha(Date date, int horas, int minutos,  int segundos)"> 
+    public static Date sumarMesDiasHorasMinutosSegundosAFecha(Date date, int mes, int dias, int horas, int minutos, int segundos) {
+        LocalDateTime ld = convertToLocalDateTimeViaInstant(date);
+
+        ld.plusMonths(mes);
+        ld.plusDays(dias);
+        ld.plusHours(horas);
+        ld.plusMinutes(minutos);
+        ld.plusSeconds(segundos);
+
         return convertLocalDateTimeToJavaDate(ld);
 //      Calendar calendar = Calendar.getInstance();
 //
@@ -1203,50 +1234,48 @@ public class DateUtil implements Serializable {
 //      calendar.add(Calendar.SECOND, segundos);  // numero de horas a añadir, o restar en caso de horas<0
 //	
 //      return calendar.getTime(); // Devuelve el objeto Date con las nuevas horas añadidas
-	
- }
-    // </editor-fold>
-     // <editor-fold defaultstate="collapsed" desc=" Date convertLocalDateTimeToJavaDate(LocalDateTime localDateTime) "> 
-  public static  Date convertLocalDateTimeToJavaDate(LocalDateTime localDateTime) {
-    return java.util.Date
-      .from(localDateTime.atZone(ZoneId.systemDefault())
-      .toInstant());
-}
-// </editor-fold>
-    
-     // <editor-fold defaultstate="collapsed" desc="LocalDateTime convertToLocalDateTimeViaInstant(Date dateToConvert)"> 
-    public static LocalDateTime convertJavaDateToLocalDateTime(Date dateToConvert) {
-    return dateToConvert.toInstant()
-      .atZone(ZoneId.systemDefault())
-      .toLocalDateTime();
-}
- // </editor-fold>
-     // <editor-fold defaultstate="collapsed" desc="LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConvert)"> 
-public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConvert) {
-    return Instant.ofEpochMilli(dateToConvert.getTime())
-      .atZone(ZoneId.systemDefault())
-      .toLocalDateTime();
-}
-    // </editor-fold>
-    
-     // <editor-fold defaultstate="collapsed" desc="Date sumarSegundosFecha(Date date, int segundos)"> 
-    public static Date sumarSegundosFecha(Date date, int segundos){
-	
-      Calendar calendar = Calendar.getInstance();
 
-      calendar.setTime(date); // Configuramos la fecha que se recibe
-	
-      calendar.add(Calendar.SECOND, segundos);  // numero de horas a añadir, o restar en caso de horas<0
-	
-      return calendar.getTime(); // Devuelve el objeto Date con las nuevas horas añadidas
-	
- }
+    }
+
     // </editor-fold>
-    
-    
-    
-    
-    
+    // <editor-fold defaultstate="collapsed" desc=" Date convertLocalDateTimeToJavaDate(LocalDateTime localDateTime) "> 
+    public static Date convertLocalDateTimeToJavaDate(LocalDateTime localDateTime) {
+        return java.util.Date
+                .from(localDateTime.atZone(ZoneId.systemDefault())
+                        .toInstant());
+    }
+// </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="LocalDateTime convertToLocalDateTimeViaInstant(Date dateToConvert)"> 
+    public static LocalDateTime convertJavaDateToLocalDateTime(Date dateToConvert) {
+        return dateToConvert.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+    }
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConvert)"> 
+
+    public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConvert) {
+        return Instant.ofEpochMilli(dateToConvert.getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+    }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Date sumarSegundosFecha(Date date, int segundos)"> 
+    public static Date sumarSegundosFecha(Date date, int segundos) {
+
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.setTime(date); // Configuramos la fecha que se recibe
+
+        calendar.add(Calendar.SECOND, segundos);  // numero de horas a añadir, o restar en caso de horas<0
+
+        return calendar.getTime(); // Devuelve el objeto Date con las nuevas horas añadidas
+
+    }
+    // </editor-fold>
+
     // <editor-fold defaultstate="collapsed" desc="segundosToHoraString"> 
     public static String segundosToHoraString(Integer segundos) {
         String resultado = "";
@@ -1276,10 +1305,11 @@ public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConve
         return String.valueOf(number);
     }// </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="milisegundos"> 
-/**
- * 
- * @return Devuelve los milisegundos como un long
- */
+
+    /**
+     *
+     * @return Devuelve los milisegundos como un long
+     */
     public static long milisegundos() {
         long milisegundos = 0;
         try {
@@ -1291,11 +1321,12 @@ public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConve
         return milisegundos;
     }// </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="Integer milisegundosToInteger()"> 
-/**
- * 
- * @return Devuelve los milisegundos actuales como un entero
- * 
- */
+
+    /**
+     *
+     * @return Devuelve los milisegundos actuales como un entero
+     *
+     */
     public static Integer milisegundosToInteger() {
         long milisegundos = 0;
         try {
@@ -1307,9 +1338,6 @@ public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConve
         return Math.toIntExact(milisegundos);
     }// </editor-fold>
 
-    
-    
-    
 // <editor-fold defaultstate="collapsed" desc="milisegundosTranscurridos"> 
     public static long milisegundosTranscurridos(long t0, long t1) {
         long milisegundos = 0;
@@ -1531,12 +1559,12 @@ public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConve
                 FacesUtil.warningMessage(rs.getString("warning.anionegativo"));
                 return false;
             }
-            if (anioselected >  getAnioActual()) {
+            if (anioselected > getAnioActual()) {
                 FacesUtil.warningMessage(rs.getString("warning.anomayorqueactual"));
                 return false;
             }
 
-            Integer anio =  getAnioActual() - anioselected;
+            Integer anio = getAnioActual() - anioselected;
             if (anio.intValue() > 1) {
                 FacesUtil.warningMessage(rs.getString("warning.aniomuyantiguo"));
                 return false;
@@ -1545,10 +1573,10 @@ public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConve
                 FacesUtil.warningMessage(rs.getString("warning.debecerrardiciembredelañoanterior"));
                 return false;
             }
-            Integer diaactual =  diaActual();
-            Integer mesactual =  mesActual();
+            Integer diaactual = diaActual();
+            Integer mesactual = mesActual();
             //Esto pasarlo a avbravoutils
-            Integer numeromesseleccionado =  numeroMes(messelected);
+            Integer numeromesseleccionado = numeroMes(messelected);
 
             if (numeromesseleccionado > mesactual) {
                 FacesUtil.warningMessage(rs.getString("warning.mesacerrarmayoractual"));
@@ -1579,22 +1607,22 @@ public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConve
                 return "warning.anionegativo";
 
             }
-            if (anioselected >  getAnioActual()) {
+            if (anioselected > getAnioActual()) {
                 return "warning.anomayorqueactual";
 
             }
 
-            Integer anio =  getAnioActual() - anioselected;
+            Integer anio = getAnioActual() - anioselected;
             if (anio.intValue() > 1) {
                 return "warning.aniomuyantiguo";
             }
             if (anio.intValue() == 1 && !messelected.toLowerCase().equals("diciembre")) {
                 return "warning.debecerrardiciembredelañoanterior";
             }
-            Integer diaactual =  diaActual();
-            Integer mesactual =  mesActual();
+            Integer diaactual = diaActual();
+            Integer mesactual = mesActual();
             //Esto pasarlo a avbravoutils
-            Integer numeromesseleccionado =  numeroMes(messelected);
+            Integer numeromesseleccionado = numeroMes(messelected);
 
             if (numeromesseleccionado > mesactual) {
                 return "warning.mesacerrarmayoractual";
@@ -1640,7 +1668,7 @@ public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConve
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="java.sql.Date convertirJavaDateToJavaSQLDate(java.util.Date date)">
     public static java.sql.Date convertirJavaDateToJavaSQLDate(java.util.Date date) {
-        return java.sql.Date.valueOf( convertirJavaDateToLocalDate(date));
+        return java.sql.Date.valueOf(convertirJavaDateToLocalDate(date));
     }
 
     // </editor-fold>
@@ -1659,12 +1687,12 @@ public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConve
     public static DecomposedDate descomponerFechaMonthStartWith0(Date date) {
         DecomposedDate decomposedDate = new DecomposedDate();
         try {
-            Integer day =  diaDeUnaFecha(date);
-            Integer month =  mesDeUnaFechaStartEneroWith0(date);
-            String nameOfMonth =  nameOfMonthStartWith0(month);
-            Integer year =  anioDeUnaFecha(date);
-            Integer hour =  horaDeUnaFecha(date);
-            Integer minute =  minutosDeUnaFecha(date);
+            Integer day = diaDeUnaFecha(date);
+            Integer month = mesDeUnaFechaStartEneroWith0(date);
+            String nameOfMonth = nameOfMonthStartWith0(month);
+            Integer year = anioDeUnaFecha(date);
+            Integer hour = horaDeUnaFecha(date);
+            Integer minute = minutosDeUnaFecha(date);
             decomposedDate.setDay(day);
             decomposedDate.setHour(hour);
             decomposedDate.setMinute(minute);
@@ -1677,6 +1705,7 @@ public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConve
         }
         return decomposedDate;
     }
+
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="descomponerFecha(Date date)">
     /**
@@ -1688,12 +1717,12 @@ public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConve
     public static DecomposedDate descomponerFechaMonthStartWith1(Date date) {
         DecomposedDate decomposedDate = new DecomposedDate();
         try {
-            Integer day =  diaDeUnaFecha(date);
-            Integer month =  mesDeUnaFechaStartEneroWith1(date);
-            String nameOfMonth =  nameOfMonthStartWith1(month);
-            Integer year =  anioDeUnaFecha(date);
-            Integer hour =  horaDeUnaFecha(date);
-            Integer minute =  minutosDeUnaFecha(date);
+            Integer day = diaDeUnaFecha(date);
+            Integer month = mesDeUnaFechaStartEneroWith1(date);
+            String nameOfMonth = nameOfMonthStartWith1(month);
+            Integer year = anioDeUnaFecha(date);
+            Integer hour = horaDeUnaFecha(date);
+            Integer minute = minutosDeUnaFecha(date);
             decomposedDate.setDay(day);
             decomposedDate.setHour(hour);
             decomposedDate.setMinute(minute);
@@ -1748,11 +1777,11 @@ public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConve
     public static List<FechaDiaUtils> validarRangoFechas(Integer anioPartida, String nombreMesPartida, Date fechaHoraPartida, Date fechaHoraRegreso) {
         List<FechaDiaUtils> fechaDiaUtilsSaveList = new ArrayList<>();
         try {
-            List<FechaDiaUtils> fechaDiaUtilsInicialList =  nameOfDayOfDateOfMonth(anioPartida, nombreMesPartida);
+            List<FechaDiaUtils> fechaDiaUtilsInicialList = nameOfDayOfDateOfMonth(anioPartida, nombreMesPartida);
 
 //convertir la fecha de solicitud a LocalDate
-            LocalDate start =  convertirJavaDateToLocalDate(fechaHoraPartida);
-            LocalDate end =  convertirJavaDateToLocalDate(fechaHoraRegreso);
+            LocalDate start = convertirJavaDateToLocalDate(fechaHoraPartida);
+            LocalDate end = convertirJavaDateToLocalDate(fechaHoraRegreso);
 
             //Buscar si esta en el intervalo de dias entre las fechas
             fechaDiaUtilsInicialList.forEach((fdu) -> {
@@ -1774,16 +1803,14 @@ public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConve
     public static String showDate(Date date) {
         String h = "";
         try {
-            h =  dateFormatToString(date, "dd/MM/yyyy");
+            h = dateFormatToString(date, "dd/MM/yyyy");
         } catch (Exception e) {
             FacesUtil.errorMessage("showDate() " + e.getLocalizedMessage());
         }
         return h;
     }// </editor-fold>
-    
 
-    
-     // <editor-fold defaultstate="collapsed" desc="hourFromDateToString(Date fecha)"> 
+    // <editor-fold defaultstate="collapsed" desc="hourFromDateToString(Date fecha)"> 
     /**
      * Devuelve una hora en formato hh:mm a o se puede especificar el formato
      * deseado
@@ -1810,31 +1837,25 @@ public static LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConve
     }
 
     // </editor-fold>
-    
-    
-    
-    
-    
-          // <editor-fold defaultstate="collapsed" desc="String showDateLocalDate(LocalDate date)">
+    // <editor-fold defaultstate="collapsed" desc="String showDateLocalDate(LocalDate date)">
     public String showDateLocalDate(LocalDate date) {
         String h = "";
         try {
             DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-h = date.format(formatters);
-            
+            h = date.format(formatters);
+
         } catch (Exception e) {
             FacesUtil.errorMessage("showDateLocalDate()" + e.getLocalizedMessage());
         }
 
         return h;
     }// </editor-fold>
-      
 
     // <editor-fold defaultstate="collapsed" desc="String showHour(Date date)">
     public static String showHour(Date date) {
         String h = "";
         try {
-            h =  hourFromDateToString(date);
+            h = hourFromDateToString(date);
         } catch (Exception e) {
             FacesUtil.errorMessage("showHour() " + e.getLocalizedMessage());
         }
@@ -1860,7 +1881,7 @@ h = date.format(formatters);
     public static java.util.Date insertHoursMinutesSecondsToDate(Date date, Integer hora, Integer minutos, Integer segundos) {
         Integer anio = anioDeUnaFecha(date);
         Integer mes = mesDeUnaFecha(date);
-        Integer dia =  diaDeUnaFecha(date);
+        Integer dia = diaDeUnaFecha(date);
         LocalDateTime start = LocalDateTime.of(anio, mes, dia, hora, minutos, segundos);
         Date ldate = Date.from(start.atZone(ZoneId.systemDefault()).toInstant());
         return ldate;
@@ -2055,14 +2076,14 @@ h = date.format(formatters);
         Boolean iguales = false;
         try {
 
-            Integer anio =  anioDeUnaFecha(fechaInicio);
-            Integer aniofin =  anioDeUnaFecha(fechaFin);
+            Integer anio = anioDeUnaFecha(fechaInicio);
+            Integer aniofin = anioDeUnaFecha(fechaFin);
 
-            Integer mes =  mesDeUnaFecha(fechaInicio);
-            Integer mesfin =  mesDeUnaFecha(fechaFin);
+            Integer mes = mesDeUnaFecha(fechaInicio);
+            Integer mesfin = mesDeUnaFecha(fechaFin);
 
-            Integer dia =  diaDeUnaFecha(fechaInicio);
-            Integer diafin =  diaDeUnaFecha(fechaFin);
+            Integer dia = diaDeUnaFecha(fechaInicio);
+            Integer diafin = diaDeUnaFecha(fechaFin);
 
             if (anio.equals(aniofin) && mes.equals(mesfin) && dia.equals(diafin)) {
                 iguales = true;
@@ -2075,48 +2096,46 @@ h = date.format(formatters);
         //  return date;
     }
     // </editor-fold>
-    
-        // <editor-fold defaultstate="collapsed" desc="LocalDateTime convertToLocalDateTimeViaInstant(Date dateToConvert) "> 
+
+    // <editor-fold defaultstate="collapsed" desc="LocalDateTime convertToLocalDateTimeViaInstant(Date dateToConvert) "> 
     /**
-     * fuente
-     * https://www.baeldung.com/java-date-to-localdate-and-localdatetime
+     * fuente https://www.baeldung.com/java-date-to-localdate-and-localdatetime
+     *
      * @param dateToConvert
-     * @return 
+     * @return
      */
     public static LocalDateTime convertToLocalDateTimeViaInstant(Date dateToConvert) {
         return dateToConvert.toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDateTime();
     }
-     //  return date;
-        // </editor-fold>
+    //  return date;
+    // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConvert)"> 
-        /**
-     * fuente
-     * https://www.baeldung.com/java-date-to-localdate-and-localdatetime
+
+    /**
+     * fuente https://www.baeldung.com/java-date-to-localdate-and-localdatetime
+     *
      * @param dateToConvert
-     * @return 
+     * @return
      */
     public static LocalDateTime convertToLocalDateTimeViaMilisecond2(Date dateToConvert) {
         return Instant.ofEpochMilli(dateToConvert.getTime())
                 .atZone(ZoneId.systemDefault())
                 .toLocalDateTime();
     }
-     //  return date;
-        // </editor-fold>
-    
-    
-    
-    
-        // <editor-fold defaultstate="collapsed" desc="String isoDateToString(Date date)"> 
+    //  return date;
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="String isoDateToString(Date date)"> 
     /**
-     * Convierte un ISODATE a String
-     * util para usar con JAX-RS en microservicios
+     * Convierte un ISODATE a String util para usar con JAX-RS en microservicios
      * que no soportan campos fechas directamente.
+     *
      * @param date
-     * @return 
+     * @return
      */
-   public static String isoDateToString(Date date) {
+    public static String isoDateToString(Date date) {
         try {
             SimpleDateFormat sdf;
             sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
@@ -2124,23 +2143,20 @@ h = date.format(formatters);
             String text = sdf.format(date);
             return text;
         } catch (Exception e) {
-            System.out.println("isoDateToString() " +e.getLocalizedMessage());
+            System.out.println("isoDateToString() " + e.getLocalizedMessage());
         }
         return "";
 
     }
-            
-                // </editor-fold>
-   
-   
-   
-   // <editor-fold defaultstate="collapsed" desc="Date stringToISODateFrom(String dateString) "> 
-   /**
-    * Convierte un String que fue convertido con isoDateToString 
-    * a Date
-    * @param dateString
-    * @return 
-    */
+
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Date stringToISODateFrom(String dateString) "> 
+    /**
+     * Convierte un String que fue convertido con isoDateToString a Date
+     *
+     * @param dateString
+     * @return
+     */
     public static Date stringToISODate(String dateString) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
         Date conveter = new Date();
@@ -2153,42 +2169,42 @@ h = date.format(formatters);
         }
         return conveter;
     }
-         // </editor-fold>
-   // <editor-fold defaultstate="collapsed" desc=" LocalTime  convertDateToLocalTime(Date date) "> 
-  /**
-   * 
-   * @param date
-   * @return 
-   */
-    public static  LocalTime  convertDateToLocalTime(Date date) {
-      LocalTime time ;
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc=" LocalTime  convertDateToLocalTime(Date date) "> 
+
+    /**
+     *
+     * @param date
+     * @return
+     */
+    public static LocalTime convertDateToLocalTime(Date date) {
+        LocalTime time;
         try {
-            return     time = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).toLocalTime();
-         
-      
+            return time = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()).toLocalTime();
+
         } catch (Exception e) {
             System.out.println("stringToISODateFrom() " + e.getLocalizedMessage());
 
         }
         return null;
     }
-         // </editor-fold>
-    
-  
-     // <editor-fold defaultstate="collapsed" desc=" String converterLocalTimeToStringAMPM(LocalTime time)"> 
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc=" String converterLocalTimeToStringAMPM(LocalTime time)"> 
     /**
-     * Convierte un LocalTime a un String agregando AM/PM
-     * Desarrollado por Isral Deago
+     * Convierte un LocalTime a un String agregando AM/PM Desarrollado por Isral
+     * Deago
+     *
      * @param time
-     * @return 
-     *   LocalTime time = LocalDateTime.ofInstant(new Date().toInstant(), ZoneId.systemDefault()).toLocalTime();
-        String timeString = converterLocalTimeToStringAMPM(time);
-        System.out.println(".......timeString "+timeString);
+     * @return LocalTime time = LocalDateTime.ofInstant(new Date().toInstant(),
+     * ZoneId.systemDefault()).toLocalTime(); String timeString =
+     * converterLocalTimeToStringAMPM(time);
+     * System.out.println(".......timeString "+timeString);
      */
-     public static String converterLocalTimeToStringAMPM(LocalTime time){
-        String tiempoString ="";
+    public static String converterLocalTimeToStringAMPM(LocalTime time) {
+        String tiempoString = "";
         try {
-         
+
             String amPM = "AM";
             int horas = time.getHour();
             int minutos = time.getMinute();
@@ -2205,23 +2221,23 @@ h = date.format(formatters);
             String minutosFinales;
             horasFinales = (horas < 10) ? "0" + horas : String.valueOf(horas);
             minutosFinales = (minutos < 10) ? "0" + minutos : String.valueOf(minutos);
-           tiempoString = horasFinales + ":" + minutosFinales + " " + amPM;
-      
+            tiempoString = horasFinales + ":" + minutosFinales + " " + amPM;
+
         } catch (Exception e) {
-            System.out.println("timeToStringAMPM() "+e.getLocalizedMessage());
+            System.out.println("timeToStringAMPM() " + e.getLocalizedMessage());
         }
         return tiempoString;
     }
-     // </editor-fold>
-     
-     // <editor-fold defaultstate="collapsed" desc=" LocalTime convertStringToLocalTimeAMPM(String submittedValue) "> 
-     
-     /**
-      * Convierte un StringAMPM a un LocalTime
-      * @param submittedValue
-      * @return 
-      */
-        public static LocalTime convertStringToLocalTimeAMPM(String submittedValue) {
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc=" LocalTime convertStringToLocalTimeAMPM(String submittedValue) "> 
+    /**
+     * Convierte un StringAMPM a un LocalTime
+     *
+     * @param submittedValue
+     * @return
+     */
+    public static LocalTime convertStringToLocalTimeAMPM(String submittedValue) {
         try {
 
             DateFormat parser = null;
@@ -2229,12 +2245,12 @@ h = date.format(formatters);
             LocalTime tiempo;
             String hora;
             String minutos;
-          
+
             if (submittedValue == null || submittedValue.isEmpty()) {
 
                 return null;
             }
-            submittedValue =submittedValue.toUpperCase();
+            submittedValue = submittedValue.toUpperCase();
             if (submittedValue.contains("AM") || submittedValue.contains("PM")) {
                 String tiempoAMPM[] = submittedValue.split(" ");
                 String horasMinutos[] = tiempoAMPM[0].split(":");
@@ -2248,9 +2264,8 @@ h = date.format(formatters);
                     hora = String.valueOf(horaMilitar);
                 }
 
-
             } else {
-                
+
                 String horasMinutos[] = submittedValue.split(":");
                 hora = horasMinutos[0];
                 minutos = horasMinutos[1];
@@ -2265,21 +2280,20 @@ h = date.format(formatters);
 
 //        return hora+":"+minutos;
     }
-     // </editor-fold>
- 
-         // <editor-fold defaultstate="collapsed" desc="String showDateLocalDateTime(java.time.LocalDateTime date) ">
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="String showDateLocalDateTime(java.time.LocalDateTime date) ">
     public static String showDateLocalDateTime(java.time.LocalDateTime date) {
         String h = "";
         try {
-            h =  dateFormatLocalDateTimeToString(date, "dd/MM/yyyy");
+            h = dateFormatLocalDateTimeToString(date, "dd/MM/yyyy");
         } catch (Exception e) {
             FacesUtil.errorMessage("showDate() " + e.getLocalizedMessage());
         }
         return h;
     }// </editor-fold>
-    
-    // <editor-fold defaultstate="collapsed" desc="String dateFormatLocalDateTimeToString(java.time.LocalDateTime  fecha, String... format) {"> 
 
+    // <editor-fold defaultstate="collapsed" desc="String dateFormatLocalDateTimeToString(java.time.LocalDateTime  fecha, String... format) {"> 
     /**
      * formatea una fecha a "dd/MM/yyyy hh:mm a"
      *
@@ -2287,7 +2301,7 @@ h = date.format(formatters);
      * @param format
      * @return
      */
-    public static String dateFormatLocalDateTimeToString(java.time.LocalDateTime  fecha, String... format) {
+    public static String dateFormatLocalDateTimeToString(java.time.LocalDateTime fecha, String... format) {
         String dateformat = "";
         String f = "dd/MM/yyyy hh:mm a";
         try {
@@ -2303,38 +2317,35 @@ h = date.format(formatters);
     }
 
     // </editor-fold>
-    
-    
-     // <editor-fold defaultstate="collapsed" desc="String showHourLocalDateTime(java.time.LocalDateTime  date)">
-    public static String showHourLocalDateTime(java.time.LocalDateTime  date) {
+    // <editor-fold defaultstate="collapsed" desc="String showHourLocalDateTime(java.time.LocalDateTime  date)">
+    public static String showHourLocalDateTime(java.time.LocalDateTime date) {
         String h = "";
         try {
-            h =  hourFromDateLocalDateTimeToString(date);
+            h = hourFromDateLocalDateTimeToString(date);
         } catch (Exception e) {
             FacesUtil.errorMessage("showHour() " + e.getLocalizedMessage());
         }
         return h;
     }// </editor-fold>
-        // <editor-fold defaultstate="collapsed" desc=" Boolean igualDiaMesAñoHoraMinuto(Date fechaInicio, Date fechaFin)"> 
-        
-        public static Boolean igualDiaMesAñoHoraMinuto(Date fechaInicio, Date fechaFin) {
+    // <editor-fold defaultstate="collapsed" desc=" Boolean igualDiaMesAñoHoraMinuto(Date fechaInicio, Date fechaFin)"> 
+
+    public static Boolean igualDiaMesAñoHoraMinuto(Date fechaInicio, Date fechaFin) {
         Boolean iguales = false;
         try {
 
-        
-         if (DateUtil.esMismoDia(fechaInicio, fechaFin)) {
-                    if (DateUtil.horaDeUnaFecha(fechaInicio).equals(DateUtil.horaDeUnaFecha(fechaFin))) {
-                        if (DateUtil.minutosDeUnaFecha(fechaInicio).equals(DateUtil.minutosDeUnaFecha(fechaFin))) {
-iguales=Boolean.TRUE;
-                        }
+            if (DateUtil.esMismoDia(fechaInicio, fechaFin)) {
+                if (DateUtil.horaDeUnaFecha(fechaInicio).equals(DateUtil.horaDeUnaFecha(fechaFin))) {
+                    if (DateUtil.minutosDeUnaFecha(fechaInicio).equals(DateUtil.minutosDeUnaFecha(fechaFin))) {
+                        iguales = Boolean.TRUE;
                     }
-
                 }
-          } catch (Exception e) {
+
+            }
+        } catch (Exception e) {
             // System.out.println("esMismoDia()" + e.getLocalizedMessage());
         }
         return iguales;
     }
     // </editor-fold>
-    
+
 }
