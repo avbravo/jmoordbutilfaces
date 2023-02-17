@@ -294,7 +294,8 @@ public class DateUtil implements Serializable {
     }
 
     // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="dateBetween(Date fechaToSearch, Date fechainicio, Date fechafin)"> 
+  
+    // <editor-fold defaultstate="collapsed" desc="dateBetweenExcludeTiem(Date fechaToSearch, Date fechainicio, Date fechafin, Boolean includeSeconds)"> 
     /**
      * busca una fecha si esta entre fechas
      *
@@ -303,55 +304,42 @@ public class DateUtil implements Serializable {
      * @param fechafin
      * @return
      */
-    public static Boolean dateBetween(Date fechaToSearch, Date fechainicio, Date fechafin) {
+    public static Boolean dateBetweenIncludeTime(Date fechaToSearch, Date fechainicio, Date fechafin, Boolean includeSeconds) {
+        Boolean result = Boolean.FALSE;
         try {
-//            Date fechainiciot = converterDate(fechainicio);
-//                    Date fechafint = converterDate(fechafin);
-            ConsoleUtil.error("[fechaToSearch " + fechaToSearch
-                    + "\nfechaInicio" + fechainicio
-                    + "\fechafin " + fechafin + "]");
-
-            ConsoleUtil.info(".........................................");
-            ConsoleUtil.info("\tif(fechaToSearch.equals(fechainicio))");
-            if (fechaToSearch.equals(fechainicio)) {
-                ConsoleUtil.info("\t\tyes");
-            } else {
-                ConsoleUtil.info("\t\tno");
-            }
-            ConsoleUtil.info("\t if(fechaToSearch.equals(fechafin))");
-            if (fechaToSearch.equals(fechafin)) {
-                ConsoleUtil.info("\t\tyes");
-            } else {
-                ConsoleUtil.info("\t\tno");
-            }
-                   ConsoleUtil.info("\t if (fechaToSearch.after(fechainicio)) ");
-            if (fechaToSearch.after(fechainicio)) {
-                ConsoleUtil.info("\t\tyes");
-            } else {
-                ConsoleUtil.info("\t\tno");
-            }
-               ConsoleUtil.info("\t if (fechaToSearch.before(fechafin))");
-            if (fechaToSearch.before(fechafin)) {
-                ConsoleUtil.info("\t\tyes");
-            } else {
-                ConsoleUtil.info("\t\tno");
-            }
-
-            ConsoleUtil.info("\tValidation all");
-            if (fechaToSearch.equals(fechainicio) || fechaToSearch.equals(fechafin) || (fechaToSearch.after(fechainicio) && fechaToSearch.before(fechafin))) {
-                ConsoleUtil.info("\t\tyes");
-                return true;
-            }else{
-                  ConsoleUtil.info("\t\tno");
-            }
+            
+           DecomposedDate  fechaToSearchDescomposedDate= descomponerFechaMonthStartWith0(fechaToSearch);
+           DecomposedDate  fechaInicioDescomposedDate= descomponerFechaMonthStartWith0(fechainicio);
+           DecomposedDate  fechaFinDescomposedDate= descomponerFechaMonthStartWith0(fechafin);
+               
+           if(fechaToSearchDescomposedDate.equalsIncludeTime(fechaInicioDescomposedDate,includeSeconds)){
+               
+               return Boolean.TRUE;
+           }
+           if(fechaToSearchDescomposedDate.equalsIncludeTime(fechaFinDescomposedDate,includeSeconds)){
+               
+               return Boolean.TRUE;
+           }
+           
+           if(fechaToSearchDescomposedDate.lessIncludeTime(fechaInicioDescomposedDate,includeSeconds)){
+               
+               return Boolean.FALSE;
+           }
+           
+           if(fechaToSearchDescomposedDate.greaterIncludeTime(fechaFinDescomposedDate,includeSeconds)){
+               
+               return Boolean.FALSE;
+           }
+           return Boolean.TRUE;
+       
         } catch (Exception e) {
             System.out.println("error() "+e.getLocalizedMessage());
         }
-        return false;
+        return Boolean.FALSE;
     }
 
     // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="dateBetweenExcludeTiem(Date fechaToSearch, Date fechainicio, Date fechafin)"> 
+    // <editor-fold defaultstate="collapsed" desc="dateBetweenExcludeTime(Date fechaToSearch, Date fechainicio, Date fechafin)"> 
     /**
      * busca una fecha si esta entre fechas
      *
@@ -361,60 +349,37 @@ public class DateUtil implements Serializable {
      * @return
      */
     public static Boolean dateBetweenExcludeTime(Date fechaToSearch, Date fechainicio, Date fechafin) {
+        Boolean result = Boolean.FALSE;
         try {
             
            DecomposedDate  fechaToSearchDescomposedDate= descomponerFechaMonthStartWith0(fechaToSearch);
            DecomposedDate  fechaInicioDescomposedDate= descomponerFechaMonthStartWith0(fechainicio);
            DecomposedDate  fechaFinDescomposedDate= descomponerFechaMonthStartWith0(fechafin);
+            
+           if(fechaToSearchDescomposedDate.equalsExcludeTime(fechaInicioDescomposedDate)){
+            
+               return Boolean.TRUE;
+           }
+           if(fechaToSearchDescomposedDate.equalsExcludeTime(fechaFinDescomposedDate)){
+            
+               return Boolean.TRUE;
+           }
+            
+           if(fechaToSearchDescomposedDate.lessExcludeTime(fechaInicioDescomposedDate)){
+               
+               return Boolean.FALSE;
+           }
            
-           ConsoleUtil.info("::::::::::::::::::::::::::::::::::::::::::::::::::");
-                   
-              ConsoleUtil.info("\tfechaToSearchDescomposedDate "+fechaToSearchDescomposedDate.toString());     
-              ConsoleUtil.info("\tfechaInicioDescomposedDate "+fechaInicioDescomposedDate.toString());     
-              ConsoleUtil.info("\tfechaFinDescomposedDate "+fechaFinDescomposedDate.toString());     
-//            Date fechainiciot = converterDate(fechainicio);
-//                    Date fechafint = converterDate(fechafin);
-            ConsoleUtil.error("[fechaToSearch " + fechaToSearch
-                    + "\nfechaInicio" + fechainicio
-                    + "\fechafin " + fechafin + "]");
-
-            ConsoleUtil.info(".........................................");
-            ConsoleUtil.info("\tif(fechaToSearch.equals(fechainicio))");
-            if (fechaToSearch.equals(fechainicio)) {
-                ConsoleUtil.info("\t\tyes");
-            } else {
-                ConsoleUtil.info("\t\tno");
-            }
-            ConsoleUtil.info("\t if(fechaToSearch.equals(fechafin))");
-            if (fechaToSearch.equals(fechafin)) {
-                ConsoleUtil.info("\t\tyes");
-            } else {
-                ConsoleUtil.info("\t\tno");
-            }
-                   ConsoleUtil.info("\t if (fechaToSearch.after(fechainicio)) ");
-            if (fechaToSearch.after(fechainicio)) {
-                ConsoleUtil.info("\t\tyes");
-            } else {
-                ConsoleUtil.info("\t\tno");
-            }
-               ConsoleUtil.info("\t if (fechaToSearch.before(fechafin))");
-            if (fechaToSearch.before(fechafin)) {
-                ConsoleUtil.info("\t\tyes");
-            } else {
-                ConsoleUtil.info("\t\tno");
-            }
-
-            ConsoleUtil.info("\tValidation all");
-            if (fechaToSearch.equals(fechainicio) || fechaToSearch.equals(fechafin) || (fechaToSearch.after(fechainicio) && fechaToSearch.before(fechafin))) {
-                ConsoleUtil.info("\t\tyes");
-                return true;
-            }else{
-                  ConsoleUtil.info("\t\tno");
-            }
+           if(fechaToSearchDescomposedDate.greaterExcludeTime(fechaFinDescomposedDate)){
+               
+               return Boolean.FALSE;
+           }
+           return Boolean.TRUE;
+       
         } catch (Exception e) {
             System.out.println("error() "+e.getLocalizedMessage());
         }
-        return false;
+        return Boolean.FALSE;
     }
 
     // </editor-fold>
@@ -748,6 +713,15 @@ public class DateUtil implements Serializable {
         calendar.setTime(date);
 
         int minuto = calendar.get(Calendar.MINUTE);
+        return minuto;
+    }
+// </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="segundosDeUnaFecha"> 
+    public static Integer segundosDeUnaFecha(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        int minuto = calendar.get(Calendar.SECOND);
         return minuto;
     }
 // </editor-fold>
@@ -1760,9 +1734,11 @@ public class DateUtil implements Serializable {
             Integer year = anioDeUnaFecha(date);
             Integer hour = horaDeUnaFecha(date);
             Integer minute = minutosDeUnaFecha(date);
+            Integer segundos = segundosDeUnaFecha(date);
             decomposedDate.setDay(day);
             decomposedDate.setHour(hour);
             decomposedDate.setMinute(minute);
+            decomposedDate.setSeconds(segundos);
             decomposedDate.setMonth(month);
             decomposedDate.setNameOfMonth(nameOfMonth);
             decomposedDate.setYear(year);
