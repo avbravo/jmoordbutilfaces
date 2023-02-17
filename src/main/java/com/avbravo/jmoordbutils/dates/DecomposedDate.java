@@ -6,6 +6,7 @@
 package com.avbravo.jmoordbutils.dates;
 
 import com.avbravo.jmoordbutils.DateUtil;
+import java.util.Objects;
 
 /**
  *
@@ -83,6 +84,37 @@ public class DecomposedDate {
 
     public void setNameOfMonth(String nameOfMonth) {
         this.nameOfMonth = nameOfMonth;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("DecomposedDate{");
+        sb.append("year=").append(year);
+        sb.append(", day=").append(day);
+        sb.append(", month=").append(month);
+        sb.append(", hour=").append(hour);
+        sb.append(", minute=").append(minute);
+        sb.append(", nameOfMonth=").append(nameOfMonth);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    
+    
+    public boolean equalsExcludeTime(DecomposedDate other) {
+       
+      
+        if (!Objects.equals(this.year, other.year)) {
+            return false;
+        }
+        if (!Objects.equals(this.day, other.day)) {
+            return false;
+        }
+        if (!Objects.equals(this.month, other.month)) {
+            return false;
+        }
+     return true;
     }
     
     
