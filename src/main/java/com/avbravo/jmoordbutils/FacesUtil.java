@@ -3098,6 +3098,40 @@ public class FacesUtil implements Serializable {
         return imageFilePath;
     }
 // </editor-fold>
+     // <editor-fold defaultstate="collapsed" desc="Boolean saveFileNotImage(BufferedImage imagenGuardar,UploadedFile localFile) ">
+    /**
+     * Guarda la imagen y devuelve el nombre del archivo geneardo con el pathIndicado
+     * @param imagenGuardar
+     * @param localFile
+     * @param fieldValue
+     * @param directoryImagenes
+     * @return 
+     */
+    public static String saveFileNotImage( UploadedFile localFile, String fieldValue, String directoryImagenes) {
+        String imageFilePath = "";
+        try {
+       BufferedImage imagenReduced=reducirImagen(localFile);    
+            String nombre;
+            File archivo;
+            if (Objects.isNull(fieldValue)
+                    || fieldValue.isBlank()
+                    || fieldValue.equals("")) {
+                nombre = FacesUtil.generateName();
+
+            } else {
+                nombre = FilenameUtils.getBaseName(fieldValue);
+            }
+            archivo = new File(directoryImagenes + nombre + FacesUtil.getFileExt(localFile));
+            ImageIO.write(imagenReduced, FacesUtil.getFileExt(localFile).substring(1), archivo);
+            imageFilePath = directoryImagenes + nombre + FacesUtil.getFileExt(localFile);
+
+        } catch (IOException e) {
+            FacesUtil.errorDialog(nameOfMethod(), e.getLocalizedMessage());
+
+        }
+        return imageFilePath;
+    }
+// </editor-fold>
     
    // <editor-fold defaultstate="collapsed" desc="Boolean tieneEspaciosBlanco(String texto)">
     public static Boolean tieneEspaciosBlanco(String texto) {
