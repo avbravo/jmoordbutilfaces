@@ -6,8 +6,6 @@
  */
 package com.avbravo.jmoordbutils.media;
 
-
-
 import com.avbravo.jmoordbutils.ConsoleUtil;
 import com.avbravo.jmoordbutils.FacesUtil;
 import static com.avbravo.jmoordbutils.FacesUtil.errorDialog;
@@ -31,125 +29,145 @@ import org.primefaces.model.StreamedContent;
 @RequestScoped
 public class JmoordbCoreMediaManager implements Serializable {
 // <editor-fold defaultstate="collapsed" desc="field">
-        private static final long serialVersionUID = 1L;
-    private StreamedContent media;
 
-    InputStream is = null;
-   // </editor-fold>
+    private static final long serialVersionUID = 1L;
+    private StreamedContent media;
     
- 
+    InputStream is = null;
+    // </editor-fold>
+
+    
     // <editor-fold defaultstate="collapsed" desc="set/get">
     public InputStream getIs() {
         return is;
     }
-
+    
     public void setIs(InputStream is) {
         this.is = is;
     }
-
+    
     public StreamedContent getMedia() {
         return media;
     }
-
+    
     public void setMedia(StreamedContent media) {
         this.media = media;
     }
 
-     // </editor-fold>
-    
-    
+    // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="init()">
-    
     @PostConstruct
     public void init() {
         try {
-   
- String fileDownloadPath = (String) JmoordbCoreMediaContext.get("pathOfFile");
-           
+            
+            String fileDownloadPath = (String) JmoordbCoreMediaContext.get("pathOfFile");
+            
             if (fileDownloadPath == null || fileDownloadPath.equals("")) {
 //                System.out.println("Es null en el context");
             } else {
-               generate(fileDownloadPath);
+                generate(fileDownloadPath);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-   // </editor-fold>
-    
-      
-    
-        // <editor-fold defaultstate="collapsed" desc="StreamedContent generate(String pathFile)">
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="StreamedContent generate(String pathFile)">
     public StreamedContent generate(String pathFile) {
         try {
             
             String name = nameOfFileInPath(pathFile);
-            String pathOfFile =pathOfFile(pathFile);
+            String pathOfFile = pathOfFile(pathFile);
             String extensionOfFileInPath = extensionOfFileInPath(pathFile);
             
-
             File filet = new File(pathFile);
             
-           
             is = new FileInputStream(filet);
-
-           media = DefaultStreamedContent.builder()
+            
+            media = DefaultStreamedContent.builder()
                     .contentType(typeOfMimeTypeForDownload(extensionOfFileInPath))
-                    .name(name +"."+ extensionOfFileInPath)
+                    .name(name + "." + extensionOfFileInPath)
                     .stream(() -> is)
                     .build();
         } catch (Exception e) {
-         FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
         }
-
+        
         return media;
     }
-      // </editor-fold>
-    
-    
-       // <editor-fold defaultstate="collapsed" desc="String typeOfMimeTypeForDownload(String extension)">
-   
-    public static String typeOfMimeTypeForDownload(String extension){
-        String text ="";
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="StreamedContent generateAgregateUserHome(String pathFile)">
+    public StreamedContent generateAgregateUserHome(String pathFile) {
         try {
-    
- 
-  switch(extension){
-            case "jpg":
-          text="image/jpg";
-                break;
-            case "jpeg":
-          text="image/jpeg";
-                break;
-            case "gif":
-               text="image/gif";
-                break;
-            case "png":
-               text="image/png";
-                break;
-            case "pdf":
-               text="application/pdf";
-                break;
-            case "plain":
-                 text ="text/plain";
-            case "cvs":
-                 text ="text/csv";
-           
-                break;
-                
-            case "txt":
-                 text="application/txt";
-           
-                break;
-                
-            default:
-               System.out.println("Esta extesnsion"+extension + " no es soportada...");
-        }
+      
+        
+            String name = nameOfFileInPath(pathFile);
+            String pathOfFile = pathOfFile(pathFile);
+            String extensionOfFileInPath = extensionOfFileInPath(pathFile);
+            
+            File filet = new File(pathFile);
+            
+            is = new FileInputStream(filet);
+            
+            media = DefaultStreamedContent.builder()
+                    .contentType(typeOfMimeTypeForDownload(extensionOfFileInPath))
+                    .name(name + "." + extensionOfFileInPath)
+                    .stream(() -> is)
+                    .build();
         } catch (Exception e) {
-           FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+        }
+        
+        return media;
+    }
+    // </editor-fold>
+    
+    
+    
+
+    // <editor-fold defaultstate="collapsed" desc="String typeOfMimeTypeForDownload(String extension)">
+    public static String typeOfMimeTypeForDownload(String extension) {
+        String text = "";
+        try {
+            
+            switch (extension) {
+                case "jpg":
+                    text = "image/jpg";
+                    break;
+                case "jpeg":
+                    text = "image/jpeg";
+                    break;
+                case "gif":
+                    text = "image/gif";
+                    break;
+                case "png":
+                    text = "image/png";
+                    break;
+                case "pdf":
+                    text = "application/pdf";
+                    break;
+                case "plain":
+                    text = "text/plain";
+                case "cvs":
+                    text = "text/csv";
+                    
+                    break;
+                
+                case "txt":
+                    text = "application/txt";
+                    
+                    break;
+                
+                default:
+                    System.out.println("Esta extesnsion" + extension + " no es soportada...");
+            }
+        } catch (Exception e) {
+            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return text;
     }
+
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="String nameOfFileInPath(String filenamePath)">
     /**
@@ -163,7 +181,7 @@ public class JmoordbCoreMediaManager implements Serializable {
             name = filenamePath.substring(filenamePath.lastIndexOf(System.getProperty("file.separator")) + 1,
                     filenamePath.lastIndexOf('.'));
         } catch (Exception e) {
-           FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return name;
         
@@ -181,7 +199,7 @@ public class JmoordbCoreMediaManager implements Serializable {
         try {
             path = filenamePath.substring(0, filenamePath.lastIndexOf(System.getProperty("file.separator")));
         } catch (Exception e) {
-          FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return path;
     }
@@ -193,17 +211,17 @@ public class JmoordbCoreMediaManager implements Serializable {
      * @param filenamePath
      * @return devuelve la extension de un archivo en un path
      */
-    public  String extensionOfFileInPath(String filenamePath) {
+    public String extensionOfFileInPath(String filenamePath) {
         String extension = "";
         try {
             extension = filenamePath.substring(filenamePath.lastIndexOf('.') + 1, filenamePath.length());
         } catch (Exception e) {
-          FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return extension;
     }
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc=" Boolean isImage(String... filenamePath))">
     /**
      *
@@ -212,36 +230,74 @@ public class JmoordbCoreMediaManager implements Serializable {
      */
     public Boolean isImage(String... filenamePath) {
         String path = "";
-        String extension=""; 
+        String extension = "";        
         Boolean valid = false;
-           
+        
         try {
-             if (filenamePath.length != 0) {
+            if (filenamePath.length != 0) {
                 path = filenamePath[0];
-
-            }else{
-                 path = (String) JmoordbCoreMediaContext.get("pathOfFile");
-
-            if (path== null || path.equals("")) {
-                path="";
-             }
-             }
-             if(!path.equals("")){
-                 extension = path.substring(path.lastIndexOf('.') + 1, path.length());
-           
-                 if(extension.equals("jpg") || extension.equals("png")  || extension.equals("jpeg")  || extension.equals("gif")){
-                     valid=true;
-                 }
-             }
-            
+                
+            } else {
+                path = (String) JmoordbCoreMediaContext.get("pathOfFile");
+                
+                if (path == null || path.equals("")) {
+                    path = "";
+                }
+            }
+            if (!path.equals("")) {
+                extension = path.substring(path.lastIndexOf('.') + 1, path.length());
+                
+                if (extension.equals("jpg") || extension.equals("png") || extension.equals("jpeg") || extension.equals("gif")) {
+                    valid = true;
+                }
+            }
             
         } catch (Exception e) {
-             FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return valid;
     }
     // </editor-fold>
-    
+
+    // <editor-fold defaultstate="collapsed" desc=" Boolean Boolean isImageAndExists(String... filenamePath)">
+    /**
+     *
+     * @param Verifica si es una imagen
+     * @return devuelve la extension de un archivo en un path
+     */
+    public Boolean isImageAndExists(String... filenamePath) {
+        String path = "";
+        String extension = "";        
+        Boolean valid = false;
+        
+        try {
+            if (filenamePath.length != 0) {
+                path = filenamePath[0];
+                
+            } else {
+                path = (String) JmoordbCoreMediaContext.get("pathOfFile");
+                
+                if (path == null || path.equals("")) {
+                    path = "";
+                }
+            }
+            if (!path.equals("")) {
+                extension = path.substring(path.lastIndexOf('.') + 1, path.length());
+                
+                if (extension.equals("jpg") || extension.equals("png") || extension.equals("jpeg") || extension.equals("gif")) {
+                   
+                        valid = existsFile( path); 
+                  
+                }
+            }
+            
+        } catch (Exception e) {
+            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+        }
+        return valid;
+    }
+    // </editor-fold>
+
     // <editor-fold defaultstate="collapsed" desc=" Boolean isPDF(String... filenamePath)">
     /**
      *
@@ -250,28 +306,27 @@ public class JmoordbCoreMediaManager implements Serializable {
      */
     public Boolean isPDF(String... filenamePath) {
         String path = "";
-        String extension=""; 
+        String extension = "";        
         Boolean valid = false;
-           
+        
         try {
-             if (filenamePath.length != 0) {
+            if (filenamePath.length != 0) {
                 path = filenamePath[0];
-
-            }else{
-                 path = (String) JmoordbCoreMediaContext.get("pathOfFile");
-
-            if (path== null || path.equals("")) {
-                path="";
-             }
-             }
-             if(!path.equals("")){
-                 extension = path.substring(path.lastIndexOf('.') + 1, path.length());
-
-                 if(extension.equals("pdf")){
-                     valid=true;
-                 }
-             }
-            
+                
+            } else {
+                path = (String) JmoordbCoreMediaContext.get("pathOfFile");
+                
+                if (path == null || path.equals("")) {
+                    path = "";
+                }
+            }
+            if (!path.equals("")) {
+                extension = path.substring(path.lastIndexOf('.') + 1, path.length());
+                
+                if (extension.equals("pdf")) {
+                    valid = true;
+                }
+            }
             
         } catch (Exception e) {
             FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
@@ -279,46 +334,83 @@ public class JmoordbCoreMediaManager implements Serializable {
         return valid;
     }
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc=" Boolean isValid()">
-    
     /**
      * Veririca si el media es un StreamContext valid
-     * @return 
+     *
+     * @return
      */
-    public Boolean isValid(){
+    public Boolean isValid() {
         try {
-            if(media!=null || media.getStream() == null || media.getName() == null){
+            if (media != null || media.getStream() == null || media.getName() == null) {
                 return false;
             }
-         return true;
+            return true;
         } catch (Exception e) {
-           FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
         }
         return false;
     }
-        // </editor-fold>
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Boolean existsFile(String path)">
+    /**
+     * Verifica si existe el archivo
+     *
+     * @param path
+     * @return
+     */
+    public Boolean existsFile(String path) {
+        try {
+            if (path == null || path.isBlank() || path.isEmpty()) {
+                return false;
+            }
+            if (Files.exists(Paths.get(path))) {
+                
+                return true;
+            }
+        } catch (Exception e) {
+            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+        }
+        return false;
+    }
+    // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Boolean existsFile(String path)">
     /**
      * Verifica si existe el archivo
+     *
      * @param path
-     * @return 
+     * @return
      */
-  public Boolean existsFile(String path) {
-    try {
-      if (path == null || path.isBlank() || path.isEmpty()) {
-        return false;
-      }
-      if (Files.exists(Paths.get(path))) {
+    public Boolean existsFile(String path) {
+        try {
+            Est3e debe ser con el HomeCollections
+                    
+            if (!pathBaseLinuxAddUserHomeStoreInCollections.get()) {
+                pathOfFile = FacesUtil.userHome() +  pathOfFile;
+  
 
-        return true;
-      }
-    } catch (Exception e) {
-     FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+            }
+            
+              @Inject
+    @ConfigProperty(name = "pathBaseLinuxAddUserHomeStoreInCollections", defaultValue = "false")
+    private Provider<Boolean> pathBaseLinuxAddUserHomeStoreInCollections;
+            if (path == null || path.isBlank() || path.isEmpty()) {
+                return false;
+            }
+            if (Files.exists(Paths.get(path))) {
+                
+                return true;
+            }
+        } catch (Exception e) {
+            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+        }
+        return false;
     }
-    return false;
-  }
-  // </editor-fold>
+    // </editor-fold>
+    
+    
     
 }
