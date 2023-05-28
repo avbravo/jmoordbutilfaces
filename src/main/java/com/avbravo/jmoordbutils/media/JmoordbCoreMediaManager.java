@@ -36,7 +36,7 @@ public class JmoordbCoreMediaManager implements Serializable {
     InputStream is = null;
     // </editor-fold>
 
-    
+
     // <editor-fold defaultstate="collapsed" desc="set/get">
     public InputStream getIs() {
         return is;
@@ -91,7 +91,7 @@ public class JmoordbCoreMediaManager implements Serializable {
                     .stream(() -> is)
                     .build();
         } catch (Exception e) {
-            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + " " + e.getLocalizedMessage());
         }
         
         return media;
@@ -116,7 +116,7 @@ public class JmoordbCoreMediaManager implements Serializable {
                     .stream(() -> is)
                     .build();
         } catch (Exception e) {
-            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + " " + e.getLocalizedMessage());
         }
         
         return media;
@@ -144,6 +144,9 @@ public class JmoordbCoreMediaManager implements Serializable {
                 case "png":
                     text = "image/png";
                     break;
+                case "webp":
+                    text = "image/webp";
+                    break;
                 case "pdf":
                     text = "application/pdf";
                     break;
@@ -153,17 +156,25 @@ public class JmoordbCoreMediaManager implements Serializable {
                     text = "text/csv";
                     
                     break;
-                
-                case "txt":
-                    text = "application/txt";
-                    
+                case "html":
+                    text = "text/html";                    
                     break;
                 
+                case "txt":
+                    text = "application/txt";                    
+                    break;
+                case "zip":
+                    text = "application/zip";                    
+                    break;
+                case "webm":
+                    text = "video/webm";                    
+                    break;
+           
                 default:
                     System.out.println("Esta extesnsion" + extension + " no es soportada...");
             }
         } catch (Exception e) {
-            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + " " + e.getLocalizedMessage());
         }
         return text;
     }
@@ -181,7 +192,7 @@ public class JmoordbCoreMediaManager implements Serializable {
             name = filenamePath.substring(filenamePath.lastIndexOf(System.getProperty("file.separator")) + 1,
                     filenamePath.lastIndexOf('.'));
         } catch (Exception e) {
-            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + " " + e.getLocalizedMessage());
         }
         return name;
         
@@ -199,7 +210,7 @@ public class JmoordbCoreMediaManager implements Serializable {
         try {
             path = filenamePath.substring(0, filenamePath.lastIndexOf(System.getProperty("file.separator")));
         } catch (Exception e) {
-            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + " " + e.getLocalizedMessage());
         }
         return path;
     }
@@ -216,7 +227,7 @@ public class JmoordbCoreMediaManager implements Serializable {
         try {
             extension = filenamePath.substring(filenamePath.lastIndexOf('.') + 1, filenamePath.length());
         } catch (Exception e) {
-            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + " " + e.getLocalizedMessage());
         }
         return extension;
     }
@@ -253,7 +264,7 @@ public class JmoordbCoreMediaManager implements Serializable {
             }
             
         } catch (Exception e) {
-            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + " " + e.getLocalizedMessage());
         }
         return valid;
     }
@@ -292,7 +303,7 @@ public class JmoordbCoreMediaManager implements Serializable {
             }
             
         } catch (Exception e) {
-            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + " " + e.getLocalizedMessage());
         }
         return valid;
     }
@@ -329,7 +340,7 @@ public class JmoordbCoreMediaManager implements Serializable {
             }
             
         } catch (Exception e) {
-            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + " " + e.getLocalizedMessage());
         }
         return valid;
     }
@@ -348,7 +359,7 @@ public class JmoordbCoreMediaManager implements Serializable {
             }
             return true;
         } catch (Exception e) {
-            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + " " + e.getLocalizedMessage());
         }
         return false;
     }
@@ -371,45 +382,13 @@ public class JmoordbCoreMediaManager implements Serializable {
                 return true;
             }
         } catch (Exception e) {
-            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + " " + e.getLocalizedMessage());
         }
         return false;
     }
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc="Boolean existsFile(String path)">
-    /**
-     * Verifica si existe el archivo
-     *
-     * @param path
-     * @return
-     */
-    public Boolean existsFile(String path) {
-        try {
-            Est3e debe ser con el HomeCollections
-                    
-            if (!pathBaseLinuxAddUserHomeStoreInCollections.get()) {
-                pathOfFile = FacesUtil.userHome() +  pathOfFile;
-  
 
-            }
-            
-              @Inject
-    @ConfigProperty(name = "pathBaseLinuxAddUserHomeStoreInCollections", defaultValue = "false")
-    private Provider<Boolean> pathBaseLinuxAddUserHomeStoreInCollections;
-            if (path == null || path.isBlank() || path.isEmpty()) {
-                return false;
-            }
-            if (Files.exists(Paths.get(path))) {
-                
-                return true;
-            }
-        } catch (Exception e) {
-            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
-        }
-        return false;
-    }
-    // </editor-fold>
     
     
     
