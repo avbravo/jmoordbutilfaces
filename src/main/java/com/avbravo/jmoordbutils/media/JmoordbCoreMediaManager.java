@@ -82,7 +82,11 @@ public class JmoordbCoreMediaManager implements Serializable {
             String extensionOfFileInPath = extensionOfFileInPath(pathFile);
             
             File filet = new File(pathFile);
-            
+          
+            if(!filet.exists()){
+          
+            }else{
+             
             is = new FileInputStream(filet);
             
             media = DefaultStreamedContent.builder()
@@ -90,6 +94,7 @@ public class JmoordbCoreMediaManager implements Serializable {
                     .name(name + "." + extensionOfFileInPath)
                     .stream(() -> is)
                     .build();
+        }
         } catch (Exception e) {
             FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + " " + e.getLocalizedMessage());
         }
@@ -282,6 +287,7 @@ public class JmoordbCoreMediaManager implements Serializable {
         Boolean valid = false;
         
         try {
+           
             if (filenamePath.length != 0) {
                 path = filenamePath[0];
                 
@@ -292,14 +298,21 @@ public class JmoordbCoreMediaManager implements Serializable {
                     path = "";
                 }
             }
+            if(path == null || path.isEmpty()){
+                return valid;
+            }
             if (!path.equals("")) {
+                
                 extension = path.substring(path.lastIndexOf('.') + 1, path.length());
                 
                 if (extension.equals("jpg") || extension.equals("png") || extension.equals("jpeg") || extension.equals("gif")) {
-                   
+                
                         valid = existsFile( path); 
                   
                 }
+                 
+               
+                
             }
             
         } catch (Exception e) {
@@ -374,13 +387,16 @@ public class JmoordbCoreMediaManager implements Serializable {
      */
     public Boolean existsFile(String path) {
         try {
+            
             if (path == null || path.isBlank() || path.isEmpty()) {
+            
                 return false;
             }
             if (Files.exists(Paths.get(path))) {
-                
+            
                 return true;
             }
+            
         } catch (Exception e) {
             FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + " " + e.getLocalizedMessage());
         }
