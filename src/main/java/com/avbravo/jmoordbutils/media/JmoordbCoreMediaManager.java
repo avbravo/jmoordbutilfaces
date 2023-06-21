@@ -112,7 +112,11 @@ public class JmoordbCoreMediaManager implements Serializable {
             String extensionOfFileInPath = extensionOfFileInPath(pathFile);
             
             File filet = new File(pathFile);
-            
+            if(!filet.exists()){
+                
+            }else{
+                
+           
             is = new FileInputStream(filet);
             
             media = DefaultStreamedContent.builder()
@@ -120,6 +124,8 @@ public class JmoordbCoreMediaManager implements Serializable {
                     .name(name + "." + extensionOfFileInPath)
                     .stream(() -> is)
                     .build();
+             }
+            
         } catch (Exception e) {
             FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + " " + e.getLocalizedMessage());
         }
@@ -194,6 +200,9 @@ public class JmoordbCoreMediaManager implements Serializable {
     public String nameOfFileInPath(String filenamePath) {
         String name = "";
         try {
+            if(filenamePath == null || filenamePath.isEmpty() || filenamePath.isBlank()){
+                return name;
+            }
             name = filenamePath.substring(filenamePath.lastIndexOf(System.getProperty("file.separator")) + 1,
                     filenamePath.lastIndexOf('.'));
         } catch (Exception e) {
