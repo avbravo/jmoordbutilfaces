@@ -4,7 +4,7 @@
 
     <groupId>com.avbravo</groupId>
     <artifactId>jmoordbutilfaces</artifactId>
-    <version>0.14</version>
+    <version>1.0</version>
     <packaging>ejb</packaging>
 
     <name>jmoordbutilfaces</name>

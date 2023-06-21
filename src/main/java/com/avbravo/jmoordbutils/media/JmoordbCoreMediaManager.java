@@ -83,7 +83,7 @@ public class JmoordbCoreMediaManager implements Serializable {
             
             File filet = new File(pathFile);
           if(filet.isDirectory()){
-              ConsoleUtil.test("\t es un directorio");
+             
               return media;
           }
             if(!filet.exists()){
@@ -206,21 +206,19 @@ public class JmoordbCoreMediaManager implements Serializable {
             if(filenamePath == null || filenamePath.isEmpty() || filenamePath.isBlank()){
                 return name;
             }
-            ConsoleUtil.test("\t<==========================================>");
-            ConsoleUtil.test("\t"+FacesUtil.nameOfClassAndMethod());
-            ConsoleUtil.test("\tfilenamePath: "+filenamePath);
+            
             if(filenamePath.lastIndexOf('.')==-1){
-                ConsoleUtil.test("\t filenamePath.lastIndexOf('.') es -1");
+            
             }else{
                    name = filenamePath.substring(filenamePath.lastIndexOf(System.getProperty("file.separator")) + 1,
                     filenamePath.lastIndexOf('.'));
             }
          
         } catch (Exception e) {
-            ConsoleUtil.test("\t error "+e.getLocalizedMessage());
+            
             FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + " " + e.getLocalizedMessage());
         }
-        ConsoleUtil.test("\t/<==========================================>");
+        
         return name;
         
     }
