@@ -26,6 +26,8 @@ import java.time.Month;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -294,7 +296,6 @@ public class DateUtil implements Serializable {
     }
 
     // </editor-fold>
-  
     // <editor-fold defaultstate="collapsed" desc="dateBetweenExcludeTiem(Date fechaToSearch, Date fechainicio, Date fechafin, Boolean includeSeconds)"> 
     /**
      * busca una fecha si esta entre fechas
@@ -307,33 +308,33 @@ public class DateUtil implements Serializable {
     public static Boolean dateBetweenIncludeTime(Date fechaToSearch, Date fechainicio, Date fechafin, Boolean includeSeconds) {
         Boolean result = Boolean.FALSE;
         try {
-            
-           DecomposedDate  fechaToSearchDescomposedDate= descomponerFechaMonthStartWith0(fechaToSearch);
-           DecomposedDate  fechaInicioDescomposedDate= descomponerFechaMonthStartWith0(fechainicio);
-           DecomposedDate  fechaFinDescomposedDate= descomponerFechaMonthStartWith0(fechafin);
-               
-           if(fechaToSearchDescomposedDate.equalsIncludeTime(fechaInicioDescomposedDate,includeSeconds)){
-               
-               return Boolean.TRUE;
-           }
-           if(fechaToSearchDescomposedDate.equalsIncludeTime(fechaFinDescomposedDate,includeSeconds)){
-               
-               return Boolean.TRUE;
-           }
-           
-           if(fechaToSearchDescomposedDate.lessIncludeTime(fechaInicioDescomposedDate,includeSeconds)){
-               
-               return Boolean.FALSE;
-           }
-           
-           if(fechaToSearchDescomposedDate.greaterIncludeTime(fechaFinDescomposedDate,includeSeconds)){
-               
-               return Boolean.FALSE;
-           }
-           return Boolean.TRUE;
-       
+
+            DecomposedDate fechaToSearchDescomposedDate = descomponerFechaMonthStartWith0(fechaToSearch);
+            DecomposedDate fechaInicioDescomposedDate = descomponerFechaMonthStartWith0(fechainicio);
+            DecomposedDate fechaFinDescomposedDate = descomponerFechaMonthStartWith0(fechafin);
+
+            if (fechaToSearchDescomposedDate.equalsIncludeTime(fechaInicioDescomposedDate, includeSeconds)) {
+
+                return Boolean.TRUE;
+            }
+            if (fechaToSearchDescomposedDate.equalsIncludeTime(fechaFinDescomposedDate, includeSeconds)) {
+
+                return Boolean.TRUE;
+            }
+
+            if (fechaToSearchDescomposedDate.lessIncludeTime(fechaInicioDescomposedDate, includeSeconds)) {
+
+                return Boolean.FALSE;
+            }
+
+            if (fechaToSearchDescomposedDate.greaterIncludeTime(fechaFinDescomposedDate, includeSeconds)) {
+
+                return Boolean.FALSE;
+            }
+            return Boolean.TRUE;
+
         } catch (Exception e) {
-            System.out.println("error() "+e.getLocalizedMessage());
+            System.out.println("error() " + e.getLocalizedMessage());
         }
         return Boolean.FALSE;
     }
@@ -351,33 +352,33 @@ public class DateUtil implements Serializable {
     public static Boolean dateBetweenExcludeTime(Date fechaToSearch, Date fechainicio, Date fechafin) {
         Boolean result = Boolean.FALSE;
         try {
-            
-           DecomposedDate  fechaToSearchDescomposedDate= descomponerFechaMonthStartWith0(fechaToSearch);
-           DecomposedDate  fechaInicioDescomposedDate= descomponerFechaMonthStartWith0(fechainicio);
-           DecomposedDate  fechaFinDescomposedDate= descomponerFechaMonthStartWith0(fechafin);
-            
-           if(fechaToSearchDescomposedDate.equalsExcludeTime(fechaInicioDescomposedDate)){
-            
-               return Boolean.TRUE;
-           }
-           if(fechaToSearchDescomposedDate.equalsExcludeTime(fechaFinDescomposedDate)){
-            
-               return Boolean.TRUE;
-           }
-            
-           if(fechaToSearchDescomposedDate.lessExcludeTime(fechaInicioDescomposedDate)){
-               
-               return Boolean.FALSE;
-           }
-           
-           if(fechaToSearchDescomposedDate.greaterExcludeTime(fechaFinDescomposedDate)){
-               
-               return Boolean.FALSE;
-           }
-           return Boolean.TRUE;
-       
+
+            DecomposedDate fechaToSearchDescomposedDate = descomponerFechaMonthStartWith0(fechaToSearch);
+            DecomposedDate fechaInicioDescomposedDate = descomponerFechaMonthStartWith0(fechainicio);
+            DecomposedDate fechaFinDescomposedDate = descomponerFechaMonthStartWith0(fechafin);
+
+            if (fechaToSearchDescomposedDate.equalsExcludeTime(fechaInicioDescomposedDate)) {
+
+                return Boolean.TRUE;
+            }
+            if (fechaToSearchDescomposedDate.equalsExcludeTime(fechaFinDescomposedDate)) {
+
+                return Boolean.TRUE;
+            }
+
+            if (fechaToSearchDescomposedDate.lessExcludeTime(fechaInicioDescomposedDate)) {
+
+                return Boolean.FALSE;
+            }
+
+            if (fechaToSearchDescomposedDate.greaterExcludeTime(fechaFinDescomposedDate)) {
+
+                return Boolean.FALSE;
+            }
+            return Boolean.TRUE;
+
         } catch (Exception e) {
-            System.out.println("error() "+e.getLocalizedMessage());
+            System.out.println("error() " + e.getLocalizedMessage());
         }
         return Boolean.FALSE;
     }
@@ -717,6 +718,7 @@ public class DateUtil implements Serializable {
     }
 // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="segundosDeUnaFecha"> 
+
     public static Integer segundosDeUnaFecha(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -2391,4 +2393,117 @@ public class DateUtil implements Serializable {
     }
     // </editor-fold>
 
+    
+
+    // <editor-fold defaultstate="collapsed" desc="LocalDate primerDiaSemanaActual(Boolean domingoPrimerDia))">
+
+    /**
+     *
+     * @param date
+     * @param domingoPrimerDia
+     * @return Referencia
+     * https://code2care.org/java/java-8-get-first-and-last-date-of-the-week-for-given-date
+     * Articulo:
+     */
+    public static LocalDate primerDiaSemanaActual(Boolean domingoPrimerDia) {
+        LocalDate date = LocalDate.now();
+        Locale UnitedStates = Locale.US;
+        WeekFields weekFields = WeekFields.of(UnitedStates);
+        DayOfWeek firstDayOfTheWeek;
+        DayOfWeek lastDayOfTheWeek;
+
+        if (domingoPrimerDia) {
+            firstDayOfTheWeek = weekFields.getFirstDayOfWeek();
+            lastDayOfTheWeek = firstDayOfTheWeek.minus(1);
+        } else {
+            firstDayOfTheWeek = weekFields.getFirstDayOfWeek().plus(1);
+            lastDayOfTheWeek = firstDayOfTheWeek.minus(1);
+            lastDayOfTheWeek.plus(1);
+        }
+
+        LocalDate firstDate = date.with(TemporalAdjusters.previousOrSame(firstDayOfTheWeek));
+        LocalDate lastDate = date.with(TemporalAdjusters.nextOrSame(lastDayOfTheWeek));
+        return firstDate;
+    }
+  // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="LocalDate primerDiaSemana(LocalDate date, Boolean domingoPrimerDia)">
+    public static LocalDate primerDiaSemana(LocalDate date, Boolean domingoPrimerDia) {
+
+        Locale UnitedStates = Locale.US;
+        WeekFields weekFields = WeekFields.of(UnitedStates);
+        DayOfWeek firstDayOfTheWeek;
+        DayOfWeek lastDayOfTheWeek;
+
+        if (domingoPrimerDia) {
+            firstDayOfTheWeek = weekFields.getFirstDayOfWeek();
+            lastDayOfTheWeek = firstDayOfTheWeek.minus(1);
+        } else {
+            firstDayOfTheWeek = weekFields.getFirstDayOfWeek().plus(1);
+            lastDayOfTheWeek = firstDayOfTheWeek.minus(1);
+            lastDayOfTheWeek.plus(1);
+        }
+
+        LocalDate firstDate = date.with(TemporalAdjusters.previousOrSame(firstDayOfTheWeek));
+        LocalDate lastDate = date.with(TemporalAdjusters.nextOrSame(lastDayOfTheWeek));
+        return firstDate;
+    }
+
+
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="LocalDate ultimoDiaSemanaActual(Boolean domingoPrimerDia)">
+    
+    /**
+     *
+     * @param date
+     * @param domingoPrimerDia
+     * @return Referencia
+     * https://code2care.org/java/java-8-get-first-and-last-date-of-the-week-for-given-date
+     * Articulo:
+     */
+    public static LocalDate ultimoDiaSemanaActual(Boolean domingoPrimerDia) {
+        LocalDate date = LocalDate.now();
+        Locale UnitedStates = Locale.US;
+        WeekFields weekFields = WeekFields.of(UnitedStates);
+        DayOfWeek firstDayOfTheWeek;
+        DayOfWeek lastDayOfTheWeek;
+
+        if (domingoPrimerDia) {
+            firstDayOfTheWeek = weekFields.getFirstDayOfWeek();
+            lastDayOfTheWeek = firstDayOfTheWeek.minus(1);
+        } else {
+            firstDayOfTheWeek = weekFields.getFirstDayOfWeek().plus(1);
+            lastDayOfTheWeek = firstDayOfTheWeek.minus(1);
+            lastDayOfTheWeek.plus(1);
+        }
+
+        LocalDate firstDate = date.with(TemporalAdjusters.previousOrSame(firstDayOfTheWeek));
+        LocalDate lastDate = date.with(TemporalAdjusters.nextOrSame(lastDayOfTheWeek));
+        return lastDate;
+    }
+
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="LocalDate ultimoDiaSemana(LocalDate date, Boolean domingoPrimerDia)">
+    
+    public static LocalDate ultimoDiaSemana(LocalDate date, Boolean domingoPrimerDia) {
+
+        Locale UnitedStates = Locale.US;
+        WeekFields weekFields = WeekFields.of(UnitedStates);
+        DayOfWeek firstDayOfTheWeek;
+        DayOfWeek lastDayOfTheWeek;
+
+        if (domingoPrimerDia) {
+            firstDayOfTheWeek = weekFields.getFirstDayOfWeek();
+            lastDayOfTheWeek = firstDayOfTheWeek.minus(1);
+        } else {
+            firstDayOfTheWeek = weekFields.getFirstDayOfWeek().plus(1);
+            lastDayOfTheWeek = firstDayOfTheWeek.minus(1);
+            lastDayOfTheWeek.plus(1);
+        }
+
+        LocalDate firstDate = date.with(TemporalAdjusters.previousOrSame(firstDayOfTheWeek));
+        LocalDate lastDate = date.with(TemporalAdjusters.nextOrSame(lastDayOfTheWeek));
+        return lastDate;
+    }
+    // </editor-fold>
 }
