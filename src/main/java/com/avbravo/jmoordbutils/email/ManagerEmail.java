@@ -6,23 +6,24 @@
 package com.avbravo.jmoordbutils.email;
 
 import com.avbravo.jmoordbutils.FacesUtil;
+import jakarta.mail.Authenticator;
+import jakarta.mail.Folder;
+import jakarta.mail.Message;
+import jakarta.mail.Multipart;
+import jakarta.mail.Session;
+import jakarta.mail.Store;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeBodyPart;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMultipart;
+import java.net.PasswordAuthentication;
 import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.Multipart;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Store;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 
 /**
  *
@@ -51,12 +52,15 @@ public class ManagerEmail {
             props.put("mail.smtp.host", "smtp.gmail.com");
             props.put("mail.smtp.port", "587");
 
-            Session session = Session.getInstance(props,
-                    new javax.mail.Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(username, password);
+             Authenticator authenticator = new Authenticator() {
+
+                protected jakarta.mail.PasswordAuthentication getPasswordAuthentication() {
+                    return new jakarta.mail.PasswordAuthentication(username, password);
                 }
-            });
+            };
+             
+              Session session = Session.getInstance(props, authenticator);
+            
 
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("emisor@gmail.com"));
@@ -105,12 +109,14 @@ public class ManagerEmail {
             props.put("mail.smtp.host", "smtp.gmail.com");
             props.put("mail.smtp.port", "587");
 
-            Session session = Session.getInstance(props,
-                    new javax.mail.Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(username, password);
+          Authenticator authenticator = new Authenticator() {
+
+                protected jakarta.mail.PasswordAuthentication getPasswordAuthentication() {
+                    return new jakarta.mail.PasswordAuthentication(username, password);
                 }
-            });
+            };
+             
+              Session session = Session.getInstance(props, authenticator);
 
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(emailremitente));
@@ -186,12 +192,14 @@ public class ManagerEmail {
                 bccAddress[i] = new InternetAddress(bcc[i]);
             }
 
-            Session session = Session.getInstance(props,
-                    new javax.mail.Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(username, password);
+             Authenticator authenticator = new Authenticator() {
+
+                protected jakarta.mail.PasswordAuthentication getPasswordAuthentication() {
+                    return new jakarta.mail.PasswordAuthentication(username, password);
                 }
-            });
+            };
+             
+              Session session = Session.getInstance(props, authenticator);
 
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(emailremitente));
@@ -259,13 +267,15 @@ public class ManagerEmail {
             props.put("mail.smtp.port", "587");
             props.put("mail.smtp.starttls.enable", "true");
 
-            Session session = Session.getInstance(props,
-                    new javax.mail.Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(username, password);
-                }
-            });
+            Authenticator authenticator = new Authenticator() {
 
+                protected jakarta.mail.PasswordAuthentication getPasswordAuthentication() {
+                    return new jakarta.mail.PasswordAuthentication(username, password);
+                }
+            };
+             
+              Session session = Session.getInstance(props, authenticator);
+              
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(emailremitente));
             message.setRecipients(Message.RecipientType.TO,
@@ -344,12 +354,14 @@ public class ManagerEmail {
             props.put("mail.smtp.port", "587");
             props.put("mail.smtp.starttls.enable", "true");
 
-            Session session = Session.getInstance(props,
-                    new javax.mail.Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(username, password);
+           Authenticator authenticator = new Authenticator() {
+
+                protected jakarta.mail.PasswordAuthentication getPasswordAuthentication() {
+                    return new jakarta.mail.PasswordAuthentication(username, password);
                 }
-            });
+            };
+             
+              Session session = Session.getInstance(props, authenticator);
 
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(emailremitente));
@@ -411,13 +423,15 @@ public class ManagerEmail {
             final String username = emailremitente;
             final String password = passwordremitente;
 
-            Session session = Session.getInstance(props,
-                    new javax.mail.Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(username, password);
-                }
-            });
+           Authenticator authenticator = new Authenticator() {
 
+                protected jakarta.mail.PasswordAuthentication getPasswordAuthentication() {
+                    return new jakarta.mail.PasswordAuthentication(username, password);
+                }
+            };
+             
+              Session session = Session.getInstance(props, authenticator);
+              
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(emailremitente));
             message.setRecipients(Message.RecipientType.TO,
@@ -473,12 +487,14 @@ public class ManagerEmail {
             props.put("mail.smtp.starttls.enable", emailSegurityProperties.getMailSmtpStarttlsEnable());
             props.put("mail.smtp.host", emailSegurityProperties.getMailSmtpHost());
             props.put("mail.smtp.port", emailSegurityProperties.getMailSmtpPort());
-            Session session = Session.getInstance(props,
-                    new javax.mail.Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(username, password);
+            Authenticator authenticator = new Authenticator() {
+
+                protected jakarta.mail.PasswordAuthentication getPasswordAuthentication() {
+                    return new jakarta.mail.PasswordAuthentication(username, password);
                 }
-            });
+            };
+             
+              Session session = Session.getInstance(props, authenticator);
 
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(emailremitente));
@@ -523,13 +539,14 @@ public class ManagerEmail {
             props.put("mail.pop3s.auth", "true");
             props.put("mail.pop3s.port", "995");
 
-            Session session = Session.getInstance(props,
-                    new javax.mail.Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(username, password);
-                }
-            });
+          Authenticator authenticator = new Authenticator() {
 
+                protected jakarta.mail.PasswordAuthentication getPasswordAuthentication() {
+                    return new jakarta.mail.PasswordAuthentication(username, password);
+                }
+            };
+             
+              Session session = Session.getInstance(props, authenticator);
             Store store = session.getStore("pop3s");
             store.connect();
             Folder emailFolder = store.getFolder("INBOX");
