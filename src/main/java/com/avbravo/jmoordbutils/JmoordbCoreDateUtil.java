@@ -650,8 +650,8 @@ public class JmoordbCoreDateUtil implements Serializable {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
 
-        int minuto = calendar.get(Calendar.SECOND);
-        return minuto;
+        int segundo = calendar.get(Calendar.SECOND);
+        return segundo;
     }
 // </editor-fold>
 
@@ -663,7 +663,7 @@ public class JmoordbCoreDateUtil implements Serializable {
     }
 // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="nameOfDay()"> 
+    // <editor-fold defaultstate="collapsed" desc=" String nameOfDay(LocalDate date) "> 
     public static String nameOfDay(LocalDate date) {
         String nombre = "DOMINGO";
         try {
@@ -700,7 +700,7 @@ public class JmoordbCoreDateUtil implements Serializable {
         return nombre;
     }
 // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="nameOfDay()"> 
+    // <editor-fold defaultstate="collapsed" desc="String nameOfDayMinuscula(LocalDate date)"> 
 
     public static String nameOfDayMinuscula(LocalDate date) {
         String nombre = "Domingo";
@@ -753,7 +753,7 @@ public class JmoordbCoreDateUtil implements Serializable {
         return nombre;
     }
 // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="nameOfDay(Date date)"> 
+    // <editor-fold defaultstate="collapsed" desc="String nameOfDayMinusculas(Date date)"> 
 
     public static String nameOfDayMinusculas(Date date) {
         String nombre = "";
@@ -1024,7 +1024,7 @@ public class JmoordbCoreDateUtil implements Serializable {
         return d;
     }// </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="Integer minutosEntreFechas(Date fechaMayor, Date fechaMenor)"> 
+// <editor-fold defaultstate="collapsed" desc="Integer diferenciaEntreFechas(Date fechaMayor, Date fechaMenor)"> 
     /**
      * Devuelve el tiempo entre dos fechas (dias,horas, munutos)
      *
@@ -1266,7 +1266,7 @@ public class JmoordbCoreDateUtil implements Serializable {
         return Math.toIntExact(milisegundos);
     }// </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="milisegundosTranscurridos"> 
+// <editor-fold defaultstate="collapsed" desc="milisegundosTranscurridosmilisegundosTranscurridos(long t0, long t1)"> 
     public static long milisegundosTranscurridos(long t0, long t1) {
         long milisegundos = 0;
         try {
@@ -1279,7 +1279,7 @@ public class JmoordbCoreDateUtil implements Serializable {
         return milisegundos;
     }// </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="milisegundosToSegundos"> 
+    // <editor-fold defaultstate="collapsed" desc="Integer milisegundosToSegundos(long milisegundos)"> 
     public static Integer milisegundosToSegundos(long milisegundos) {
         Integer seconds = 0;
         try {
@@ -2017,7 +2017,7 @@ public class JmoordbCoreDateUtil implements Serializable {
     }
     //  return date;
     // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="LocalDateTime convertToLocalDateTimeViaMilisecond(Date dateToConvert)"> 
+    // <editor-fold defaultstate="collapsed" desc="LocalDateTime convertToLocalDateTimeViaMilisecond2(Date dateToConvert)"> 
 
     /**
      * fuente https://www.baeldung.com/java-date-to-localdate-and-localdatetime
@@ -2084,7 +2084,6 @@ public class JmoordbCoreDateUtil implements Serializable {
      * @param fecha
      * @return
      */
-
     public static LocalDateTime dateToLocalDateTime(Date fecha) {
         LocalDateTime startTime = LocalDateTime.now();
         try {
@@ -2103,12 +2102,12 @@ public class JmoordbCoreDateUtil implements Serializable {
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="LocalDateTime dateToLocalDateTimeFirstHourOfDay(Date fecha)">
-
-   /**
-    * Devuelve la primera hora de una fecha como LocalDateTime
-    * @param fecha
-    * @return 
-    */
+    /**
+     * Devuelve la primera hora de una fecha como LocalDateTime
+     *
+     * @param fecha
+     * @return
+     */
     public static LocalDateTime dateToLocalDateTimeFirstHourOfDay(Date fecha) {
         LocalDateTime startTime = LocalDateTime.now();
         try {
@@ -2127,12 +2126,12 @@ public class JmoordbCoreDateUtil implements Serializable {
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="LocalDateTime dateToLocalDateTimeLastHourOfDay(Date fecha)">
-
-   /**
-    * Devuelve la ultima hora de una fecha como LocalDateTime
-    * @param fecha
-    * @return 
-    */
+    /**
+     * Devuelve la ultima hora de una fecha como LocalDateTime
+     *
+     * @param fecha
+     * @return
+     */
     public static LocalDateTime dateToLocalDateTimeLastHourOfDay(Date fecha) {
         LocalDateTime startTime = LocalDateTime.now();
         try {
@@ -2150,18 +2149,17 @@ public class JmoordbCoreDateUtil implements Serializable {
     }
 
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="LocalDateTime dateToLocalDateTimeFirstHourOfDay(LocalDateTime fecha)">
-
-   /**
-    * Devuelve la ultima hora de una fecha como LocalDateTime
-    * @param fecha
-    * @return 
-    */
+    /**
+     * Devuelve la ultima hora de una fecha como LocalDateTime
+     *
+     * @param fecha
+     * @return
+     */
     public static LocalDateTime dateToLocalDateTimeFirstHourOfDay(LocalDateTime fecha) {
         LocalDateTime startTime = LocalDateTime.now();
         try {
-           
+
             startTime = LocalDateTime.of(fecha.getYear(), fecha.getMonth(), fecha.getDayOfMonth(), 0, 0, 0);
         } catch (Exception e) {
             System.out.println("dateToLocalDateTimeLastHourOfDay() " + e.getLocalizedMessage());
@@ -2171,16 +2169,16 @@ public class JmoordbCoreDateUtil implements Serializable {
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="LocalDateTime dateToLocalDateTimeLastHourOfDay(LocalDateTime fecha)">
-
-   /**
-    * Devuelve la ultima hora de una fecha como LocalDateTime
-    * @param fecha
-    * @return 
-    */
+    /**
+     * Devuelve la ultima hora de una fecha como LocalDateTime
+     *
+     * @param fecha
+     * @return
+     */
     public static LocalDateTime dateToLocalDateTimeLastHourOfDay(LocalDateTime fecha) {
         LocalDateTime startTime = LocalDateTime.now();
         try {
-           
+
             startTime = LocalDateTime.of(fecha.getYear(), fecha.getMonth(), fecha.getDayOfMonth(), 23, 59, 59);
         } catch (Exception e) {
             System.out.println("dateToLocalDateTimeLastHourOfDay() " + e.getLocalizedMessage());
@@ -2189,20 +2187,19 @@ public class JmoordbCoreDateUtil implements Serializable {
     }
 
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="LocalDateTime dateToLocalDateTimeNextDayFirstHourOfDay(Date fecha)">
-
-   /**
-    * Devuelve el dia siguiente
-    * @param fecha
-    * @return 
-    */
+    /**
+     * Devuelve el dia siguiente
+     *
+     * @param fecha
+     * @return
+     */
     public static LocalDateTime dateToLocalDateTimeNextDayFirstHourOfDay(Date fecha) {
         LocalDateTime startTime = LocalDateTime.now();
         try {
             Integer anio = anioDeUnaFecha(fecha);
             Integer mes = mesDeUnaFecha(fecha);
-            Integer dia = diaDeUnaFecha(fecha) ;
+            Integer dia = diaDeUnaFecha(fecha);
             Integer hora = horaDeUnaFecha(fecha);
             Integer minutos = minutosDeUnaFecha(fecha);
             Integer segundos = segundosDeUnaFecha(fecha);
@@ -2215,21 +2212,19 @@ public class JmoordbCoreDateUtil implements Serializable {
     }
 
     // </editor-fold>
-    
-    
-     // <editor-fold defaultstate="collapsed" desc="LocalDateTime dateToLocalDateTimeLastHourOfDay(LocalDateTime fecha)">
-
-   /**
-    * Devuelve la ultima hora de una fecha como LocalDateTime
-    * @param fecha
-    * @return 
-    */
+    // <editor-fold defaultstate="collapsed" desc="LocalDateTime dateToLocalDateTimeLastHourOfDay(LocalDateTime fecha)">
+    /**
+     * Devuelve la ultima hora de una fecha como LocalDateTime
+     *
+     * @param fecha
+     * @return
+     */
     public static LocalDateTime dateToLocalDateTimeNextDayFirstHourOfDay(LocalDateTime fecha) {
         LocalDateTime startTime = LocalDateTime.now();
         try {
-           LocalDateTime tomorrow = fecha.plusDays(1); 
+            LocalDateTime tomorrow = fecha.plusDays(1);
 //            startTime = LocalDateTime.of(fecha.getYear(), fecha.getMonth(), fecha.getDayOfMonth() +1, 0, 0, 0);
-            startTime = LocalDateTime.of(tomorrow.getYear(), tomorrow.getMonth(), tomorrow.getDayOfMonth() , 0, 0, 0);
+            startTime = LocalDateTime.of(tomorrow.getYear(), tomorrow.getMonth(), tomorrow.getDayOfMonth(), 0, 0, 0);
         } catch (Exception e) {
             System.out.println("dateToLocalDateTimeLastHourOfDay() " + e.getLocalizedMessage());
         }
@@ -2238,23 +2233,23 @@ public class JmoordbCoreDateUtil implements Serializable {
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="LocalDateTime dateToLocalDateTimeBeforeFirstHourOfDay((Date fecha)">
-
-   /**
-    * Devuelve el dia siguiente
-    * @param fecha
-    * @return 
-    */
+    /**
+     * Devuelve el dia siguiente
+     *
+     * @param fecha
+     * @return
+     */
     public static LocalDateTime dateToLocalDateTimeBeforeFirstHourOfDay(Date fecha) {
         LocalDateTime startTime = LocalDateTime.now();
         try {
             Integer anio = anioDeUnaFecha(fecha);
             Integer mes = mesDeUnaFecha(fecha);
-            Integer dia = diaDeUnaFecha(fecha) ;
+            Integer dia = diaDeUnaFecha(fecha);
             Integer hora = horaDeUnaFecha(fecha);
             Integer minutos = minutosDeUnaFecha(fecha);
             Integer segundos = segundosDeUnaFecha(fecha);
             startTime = LocalDateTime.of(anio, mes, dia, 0, 0, 0);
-          //  startTime = dateToLocalDateTimeNextDayFirstHourOfDay(startTime);
+            //  startTime = dateToLocalDateTimeNextDayFirstHourOfDay(startTime);
         } catch (Exception e) {
             System.out.println("dateToLocalDateTimeBeforeDayFirstHourOfDay() " + e.getLocalizedMessage());
         }
@@ -2262,25 +2257,82 @@ public class JmoordbCoreDateUtil implements Serializable {
     }
 
     // </editor-fold>
-    
-    
-     // <editor-fold defaultstate="collapsed" desc="LocalDateTime dateToLocalDateTimeBeforeFirstHourOfDay(LocalDateTime fecha)">
-
-   /**
-    * Devuelve la ultima hora de una fecha como LocalDateTime
-    * @param fecha
-    * @return 
-    */
+    // <editor-fold defaultstate="collapsed" desc="LocalDateTime dateToLocalDateTimeBeforeFirstHourOfDay(LocalDateTime fecha)">
+    /**
+     * Devuelve la ultima hora de una fecha como LocalDateTime
+     *
+     * @param fecha
+     * @return
+     */
     public static LocalDateTime dateToLocalDateTimeBeforeFirstHourOfDay(LocalDateTime fecha) {
         LocalDateTime startTime = LocalDateTime.now();
         try {
-          LocalDateTime tomorrow = fecha;
-          startTime = LocalDateTime.of(tomorrow.getYear(), tomorrow.getMonth(), tomorrow.getDayOfMonth() , 0, 0, 0);
+            LocalDateTime tomorrow = fecha;
+            startTime = LocalDateTime.of(tomorrow.getYear(), tomorrow.getMonth(), tomorrow.getDayOfMonth(), 0, 0, 0);
         } catch (Exception e) {
             System.out.println("dateToLocalDateTimeBeforeDayFirstHourOfDay() " + e.getLocalizedMessage());
         }
         return startTime;
     }
 
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="String secondsToHourMinuteSeconds(Long seconds)">
+    public static String secondsToHourMinuteSeconds(Long seconds) {
+        var result = "";
+        try {
+
+            var hora = seconds / 3600;
+            var minutos = (seconds - (3600 * hora)) / 60;
+            var segundos = seconds - ((hora * 3600) + (minutos * 60));
+
+            result = hora + ":" + minutos + ":" + segundos;
+
+        } catch (Exception e) {
+            System.out.println("milisecondsToHourMinuteSeconds() " + e.getLocalizedMessage());
+        }
+        return result;
+
+    }
+
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="String secondsToHourMinuteSeconds(Long seconds)">
+    public static JmoordbCoreTiempo secondsToHourMinuteSecondsTiempo(Long seconds) {
+        var result = new JmoordbCoreTiempo();
+        try {
+
+            Long hora = seconds / 3600;
+            Long minutos = (seconds - (3600 * hora)) / 60;
+            var segundos = seconds - ((hora * 3600) + (minutos * 60));
+            result.setDias(Integer.SIZE);
+            result.setHoras(hora.intValue());
+            result.setMinutos(minutos.intValue());
+
+         
+
+        } catch (Exception e) {
+            System.out.println("milisecondsToHourMinuteSeconds() " + e.getLocalizedMessage());
+        }
+        return result;
+
+    }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Date sumarHorasMinutosToFecha(Date date, Integer hour, Integer minutes)">
+    
+    public static Date sumarHorasMinutosToFecha(Date date, Integer hour, Integer minutes){
+        var result =new Date();
+        try {
+            Calendar calendar = Calendar.getInstance();
+calendar.setTime(date);
+calendar.add(Calendar.HOUR,   hour); 
+calendar.add(Calendar.MINUTE, minutes); 
+
+
+result= calendar.getTime();
+       } catch (Exception e) {
+            System.out.println("sumarHorasMinutosToFecha() " + e.getLocalizedMessage());
+        }
+        return result;
+    }
     // </editor-fold>
 }
