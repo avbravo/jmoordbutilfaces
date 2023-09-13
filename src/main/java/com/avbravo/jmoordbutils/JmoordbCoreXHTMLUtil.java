@@ -22,6 +22,7 @@ public interface JmoordbCoreXHTMLUtil {
             }
 
         } catch (Exception e) {
+            System.out.println(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
             FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
         }
 
@@ -106,4 +107,17 @@ public interface JmoordbCoreXHTMLUtil {
         }
         return result;
     }// </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="String deleteComillas(String texto">
+
+    default String deleteComillas(String texto){
+        var result ="";
+        try {
+            result= texto.replace("\"", "");
+      } catch (Exception e) {
+            System.out.println(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+        }
+        return result;
+    }
+    // </editor-fold>
 }
