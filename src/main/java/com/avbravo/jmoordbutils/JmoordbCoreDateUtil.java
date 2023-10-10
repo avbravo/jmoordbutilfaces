@@ -1034,13 +1034,14 @@ public class JmoordbCoreDateUtil implements Serializable {
      */
     public static JmoordbCoreTiempo diferenciaEntreFechas(Date fechaMayor, Date fechaMenor) {
         int d = 0;
-        JmoordbCoreTiempo tiempo = new JmoordbCoreTiempo(0, 0, 0);
+        JmoordbCoreTiempo tiempo = new JmoordbCoreTiempo(0, 0, 0,0);
         try {
             int diferencia = (int) ((fechaMayor.getTime() - fechaMenor.getTime()) / 1000);
 
             int dias = 0;
             int horas = 0;
             int minutos = 0;
+            int segundos = 0;
             if (diferencia > 86400) {
                 dias = (int) Math.floor(diferencia / 86400);
                 diferencia = diferencia - (dias * 86400);
@@ -1053,7 +1054,11 @@ public class JmoordbCoreDateUtil implements Serializable {
                 minutos = (int) Math.floor(diferencia / 60);
                 diferencia = diferencia - (minutos * 60);
             }
-
+  segundos = horas % 60;
+  if(segundos >=60){
+      segundos=0;
+      minutos++;
+  }
             if (minutos >= 60) {
                 minutos = 0;
                 horas++;
@@ -1065,6 +1070,7 @@ public class JmoordbCoreDateUtil implements Serializable {
             tiempo.setDias(dias);
             tiempo.setHoras(horas);
             tiempo.setMinutos(minutos);
+            tiempo.setSegundos(segundos);
 
         } catch (Exception e) {
             FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + "error: " + e.getLocalizedMessage());
