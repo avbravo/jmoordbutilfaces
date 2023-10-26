@@ -1347,7 +1347,7 @@ public class DateUtil implements Serializable {
 
         return String.valueOf(number);
     }// </editor-fold>
-// <editor-fold defaultstate="collapsed" desc="milisegundos"> 
+// <editor-fold defaultstate="collapsed" desc="long milisegundos()"> 
 
     /**
      *
