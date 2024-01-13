@@ -120,4 +120,18 @@ public interface JmoordbCoreXHTMLUtil {
         return result;
     }
     // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Integer calcularConverterMaxNumberOfElements(Integer size, Integer max)">
+
+    public default Integer calcularConverterMaxNumberOfElements(Integer size, Integer max){
+        Integer result = 0;
+        try {
+             result = size < max ? size: max;
+        } catch (Exception e) {
+            System.out.println(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+            FacesUtil.errorMessage(FacesUtil.nameOfMethod() + " " + e.getLocalizedMessage());
+        }
+        return result;
+    }
+        // </editor-fold>
 }
