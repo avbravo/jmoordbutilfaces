@@ -11,6 +11,9 @@ import java.util.Date;
  * @author avbravo
  */
 public interface JmoordbCoreXHTMLUtil {
+    
+     public void preDestroy();
+     
     // <editor-fold defaultstate="collapsed" desc="String cutTextObservacio(Boletas boletas,Integer largo)">
 
     default public String cutText(String text, Integer largo) {
