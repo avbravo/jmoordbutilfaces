@@ -61,11 +61,12 @@ public class JmoordbCoreMediaManager implements Serializable {
         try {
             
             String fileDownloadPath = (String) JmoordbCoreMediaContext.get("pathOfFile");
+            String nameFileDownloadPath = (String) JmoordbCoreMediaContext.get("nameOfFile");
             
             if (fileDownloadPath == null || fileDownloadPath.equals("")) {
 //                System.out.println("Es null en el context");
             } else {
-                generate(fileDownloadPath);
+                generate(fileDownloadPath,nameFileDownloadPath);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,11 +74,11 @@ public class JmoordbCoreMediaManager implements Serializable {
     }
     // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="StreamedContent generate(String pathFile)">
-    public StreamedContent generate(String pathFile) {
+    // <editor-fold defaultstate="collapsed" desc="StreamedContent generate(String pathFile, String nameFile))">
+    public StreamedContent generate(String pathFile, String nameFile) {
         try {
             
-            String name = nameOfFileInPath(pathFile);
+         //   String name = nameOfFileInPath(pathFile);
             String pathOfFile = pathOfFile(pathFile);
             String extensionOfFileInPath = extensionOfFileInPath(pathFile);
             
@@ -91,12 +92,22 @@ public class JmoordbCoreMediaManager implements Serializable {
             }else{
              
             is = new FileInputStream(filet);
-            
-            media = DefaultStreamedContent.builder()
+            if(nameFile == null || nameFile.equals("")){
+                String name = nameOfFileInPath(pathFile);
+                   media = DefaultStreamedContent.builder()
                     .contentType(typeOfMimeTypeForDownload(extensionOfFileInPath))
                     .name(name + "." + extensionOfFileInPath)
                     .stream(() -> is)
                     .build();
+            }else{
+                  media = DefaultStreamedContent.builder()
+                    .contentType(typeOfMimeTypeForDownload(extensionOfFileInPath))
+                    .name(nameFile + "." + extensionOfFileInPath)
+                    .stream(() -> is)
+                    .build();
+            }
+          
+//         
         }
         } catch (Exception e) {
             FacesUtil.errorMessage(FacesUtil.nameOfClassAndMethod() + " " + e.getLocalizedMessage());
