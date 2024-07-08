@@ -2506,4 +2506,23 @@ public class DateUtil implements Serializable {
         return lastDate;
     }
     // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc=" Date datoToiSODateToDate(Date date)"> 
+    /**
+     * Convierte de Date a IsoDate a Date
+     * @param date
+     * @return 
+     */
+    public static Date datoToiSODateToDate(Date date) {
+        try {
+             String df = JmoordbCoreDateUtil.iSODate(date);
+                df = df.replace("Z", "");            
+                SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                Date dateconverter = isoFormat.parse(df);
+                return dateconverter;
+        } catch (Exception e) {
+        }
+        return new Date();
+    }
+// </editor-fold>
 }
